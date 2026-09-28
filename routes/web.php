@@ -18,6 +18,7 @@ use App\Http\Controllers\Master\TariffController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\OutpatientController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingController;
@@ -33,8 +34,31 @@ use App\Http\Controllers\Warehouse\WarehouseMutationController;
 use App\Http\Controllers\Warehouse\WarehouseReceiptController;
 use Illuminate\Support\Facades\Route;
 
-// Public Landing Page
-Route::get('/', fn () => view('landing'))->name('landing');
+// ── PUBLIC WEBSITE — RSU Rajawali Citra ──────────────────────────────────────
+Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/tentang-kami', [PublicController::class, 'about'])->name('about');
+
+// Layanan
+Route::get('/layanan', [PublicController::class, 'services'])->name('services');
+Route::get('/layanan/{slug}', [PublicController::class, 'serviceDetail'])->name('services.detail');
+
+// Dokter
+Route::get('/dokter', [PublicController::class, 'doctors'])->name('doctors');
+Route::get('/dokter/{slug}', [PublicController::class, 'doctorDetail'])->name('doctors.detail');
+
+// Informasi
+Route::get('/informasi', [PublicController::class, 'information'])->name('information');
+Route::get('/informasi/berita', [PublicController::class, 'news'])->name('news');
+Route::get('/informasi/berita/{slug}', [PublicController::class, 'newsDetail'])->name('news.detail');
+Route::get('/informasi/artikel', [PublicController::class, 'articles'])->name('articles');
+Route::get('/informasi/artikel/{slug}', [PublicController::class, 'articleDetail'])->name('articles.detail');
+Route::get('/informasi/faq', [PublicController::class, 'faq'])->name('faq');
+
+// Kontak
+Route::get('/kontak', [PublicController::class, 'contact'])->name('contact');
+
+// Legacy redirect – keep old landing route alive
+Route::get('/landing', fn () => redirect()->route('home'))->name('landing');
 
 // Guest Authentication Routes
 Route::middleware('guest')->group(function () {
