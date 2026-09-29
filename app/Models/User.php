@@ -75,6 +75,25 @@ class User extends Authenticatable
     }
 
     /**
+     * Memeriksa apakah user memiliki role tertentu.
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    /**
+     * Memeriksa apakah user memiliki salah satu dari beberapa role.
+     */
+    public function hasAnyRole(array|string $roles): bool
+    {
+        $roleArray = is_array($roles) ? $roles : explode(',', $roles);
+        $roleArray = array_map('trim', $roleArray);
+
+        return $this->roles->contains(fn ($r) => in_array($r->name, $roleArray));
+    }
+
+    /**
      * Relasi ke profil Dokter jika akun ini milik seorang Dokter.
      */
     public function doctor(): HasOne

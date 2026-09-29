@@ -78,7 +78,9 @@
                     <input type="checkbox" name="remember" checked class="rounded border-slate-300 text-blue-900 focus:ring-blue-800 w-4 h-4">
                     <span>Ingat Saya</span>
                 </label>
-                <span class="text-slate-500 font-medium flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Terenkripsi SSL</span>
+                <a href="{{ route('password.request') }}" class="font-semibold text-blue-900 hover:underline">
+                    Lupa Kata Sandi?
+                </a>
             </div>
 
             <button type="submit" class="w-full py-3 px-4 bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer min-h-[46px]">
@@ -87,10 +89,16 @@
             </button>
         </form>
 
-        <div class="text-center pt-2 border-t border-slate-100">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-900 font-semibold transition py-2">
-                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Kembali ke Website Utama
-            </a>
+        <div class="text-center pt-3 border-t border-slate-100 space-y-2">
+            <p class="text-xs text-slate-600">
+                Belum memiliki akun?
+                <a href="{{ route('register') }}" class="font-bold text-blue-900 hover:underline">Daftar Sekarang</a>
+            </p>
+            <div>
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-900 font-semibold transition py-1">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Kembali ke Website Utama
+                </a>
+            </div>
         </div>
     </main>
 
