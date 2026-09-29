@@ -6,19 +6,22 @@ use App\Models\Bed;
 use App\Models\Doctor;
 use App\Models\InpatientVisit;
 use App\Models\Invoice;
+use App\Models\LaboratoryOrder;
 use App\Models\Medicine;
 use App\Models\MedicineStock;
 use App\Models\Patient;
 use App\Models\Payment;
+use App\Models\Prescription;
 use App\Models\Registration;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class DashboardService
 {
     /**
-     * Mengambil seluruh data statistik agregat untuk dashboard SIMRS.
+     * Mengambil seluruh data statistik agregat untuk dashboard SIMRS secara terukur dan aman.
      */
-    public function getDashboardData(): array
+    public function getDashboardData(?User $user = null): array
     {
         $today = now()->today();
 
@@ -33,6 +36,19 @@ class DashboardService
         $totalMedicines = Medicine::where('is_active', true)->count();
         $todayRevenue = Payment::whereDate('payment_date', $today)->sum('amount_paid');
         $unpaidInvoicesCount = Invoice::where('status', Invoice::STATUS_UNPAID)->count();
+
+        // Role-Specific Real Data Highlights
+        $roleContext = [
+            'primaryRole' => $user ? ($user->roles->first()?->name ?? 'Pengguna') : 'Guest',
+            'pendingPrescriptions' => Prescription::where('status', 'PENDING')->count(),
+            'pendingLabOrders' => LaboratoryOrder::where('status', 'PENDING')->count(),
+            'todayRegistrations' => $todayPatients,
+            'myDoctorPatients' => ($user && $user->doctor)
+                ? Registration::whereDate('registration_date', $today)
+                    ->whereHas('queue', fn ($q) => $q->where('doctor_id', $user->doctor->id))
+                    ->count()
+                : 0,
+        ];
 
         // 2. Monthly Visits Data (12 Bulan Terakhir)
         $visitsMonthly = Registration::selectRaw("DATE_FORMAT(registration_date, '%Y-%m') as month, COUNT(*) as total")
@@ -111,6 +127,7 @@ class DashboardService
             ->get();
 
         return [
+            'roleContext' => $roleContext,
             'metrics' => [
                 'totalPatients' => $totalPatients,
                 'todayPatients' => $todayPatients,

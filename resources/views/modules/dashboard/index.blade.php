@@ -12,7 +12,7 @@
                 Selamat Datang, {{ auth()->user()->name ?? 'Administrator Medis' }}
             </h1>
             <p class="text-xs text-slate-500 mt-0.5">
-                Ringkasan operasional dan indikator kinerja utama (KPI) RSUD Kencana Medika hari ini.
+                Ringkasan operasional dan indikator kinerja utama (KPI) RSU Rajawali Citra hari ini.
             </p>
         </div>
         <div>

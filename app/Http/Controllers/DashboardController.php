@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\DashboardService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,11 +13,12 @@ class DashboardController extends Controller
     ) {}
 
     /**
-     * Menampilkan halaman Dashboard utama SIMRS.
+     * Menampilkan halaman Dashboard utama SIMRS yang disesuaikan dengan role & izin pengguna.
      */
     public function index(): View
     {
-        $data = $this->dashboardService->getDashboardData();
+        $user = Auth::user();
+        $data = $this->dashboardService->getDashboardData($user);
 
         return view('modules.dashboard.index', $data);
     }
