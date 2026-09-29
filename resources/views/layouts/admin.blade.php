@@ -11,7 +11,8 @@
     <title>@yield('title', 'Dashboard') | {{ config('simrs.app_title_suffix', 'SIMRS') }} - {{ config('simrs.hospital_name', 'RSU Rajawali Citra') }}</title>
 
     <!-- Favicon System -->
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <!-- Google Fonts Inter -->
@@ -73,13 +74,8 @@
             <!-- Brand Header -->
             <div class="h-16 flex items-center justify-between px-5 border-b border-slate-800/80 bg-slate-900/50">
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-3 text-white text-decoration-none">
-                    <div class="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center shadow-md shadow-teal-900/30">
-                        <i data-lucide="building-2" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <span class="font-bold text-sm tracking-tight text-white block">{{ config('simrs.app_name', 'SIMRS Rajawali Citra') }}</span>
-                        <span class="text-[10px] font-medium text-teal-400 block tracking-wider uppercase">Enterprise System</span>
-                    </div>
+                    <img src="{{ asset('logo.png') }}" alt="Logo SIMRS Rajawali Citra" class="h-8 w-auto object-contain bg-white rounded-lg p-1 shadow-sm">
+                    <span class="text-[10px] font-bold text-teal-400 block tracking-wider uppercase">Enterprise</span>
                 </a>
                 <button id="sidebarCloseBtn" class="lg:hidden text-slate-400 hover:text-white p-1 rounded-lg">
                     <i data-lucide="x" class="w-5 h-5"></i>

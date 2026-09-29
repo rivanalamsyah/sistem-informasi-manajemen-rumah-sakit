@@ -22,10 +22,10 @@
     <meta name="twitter:title" content="@yield('og_title', 'RSU Rajawali Citra')">
     <meta name="twitter:description" content="@yield('og_description', 'Pelayanan kesehatan berkualitas di Bantul, Yogyakarta.')">
 
-    {{-- Favicon --}}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="manifest" href="/site.webmanifest">
+    {{-- Favicon System --}}
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     {{-- Fonts: Inter & Playfair Display --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -599,16 +599,8 @@
         <header class="navbar" id="navbar" role="banner">
             <div class="navbar-inner">
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="nav-logo" aria-label="RSU Rajawali Citra — Beranda">
-                    <div class="nav-logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" class="w-6 h-6" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="nav-logo-title">RSU Rajawali Citra</div>
-                        <div class="nav-logo-subtitle">Bantul, DI Yogyakarta</div>
-                    </div>
+                <a href="{{ route('home') }}" class="nav-logo flex items-center gap-2" aria-label="RSU Rajawali Citra — Beranda">
+                    <img src="{{ asset('logo.png') }}" alt="Logo RSU Rajawali Citra" class="h-10 sm:h-12 w-auto object-contain">
                 </a>
 
                 {{-- Desktop Navigation --}}
@@ -676,17 +668,9 @@
     <div class="mobile-overlay" id="mobileOverlay"></div>
     <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menu Mobile" role="dialog" aria-modal="true">
         <div class="mobile-drawer-header">
-            <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-blue-900 flex items-center justify-center text-white font-bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" class="w-5 h-5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-sm font-extrabold text-slate-900 leading-tight">RSU Rajawali Citra</div>
-                    <div class="text-[11px] text-slate-500 font-medium">Menu Navigasi</div>
-                </div>
-            </div>
+            <a href="{{ route('home') }}" class="flex items-center gap-2">
+                <img src="{{ asset('logo.png') }}" alt="Logo RSU Rajawali Citra" class="h-9 w-auto object-contain">
+            </a>
             <button id="closeDrawerBtn" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition" aria-label="Tutup menu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -756,13 +740,10 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
                     {{-- Brand --}}
                     <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" class="w-6 h-6" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                                </svg>
-                            </div>
-                            <span class="footer-brand-name">RSU Rajawali Citra</span>
+                        <div class="mb-4">
+                            <a href="{{ route('home') }}" class="inline-block">
+                                <img src="{{ asset('logo.png') }}" alt="RSU Rajawali Citra" class="h-11 w-auto object-contain bg-white rounded-xl p-1.5 shadow-sm">
+                            </a>
                         </div>
                         <p class="footer-desc">Rumah Sakit Umum yang berdedikasi memberikan pelayanan kesehatan berkualitas, profesional, dan terpercaya untuk masyarakat Bantul dan Yogyakarta.</p>
                         <div class="flex flex-wrap gap-2 mt-5">

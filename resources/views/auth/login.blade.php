@@ -7,8 +7,8 @@
 
     <title>Login Staf &amp; Portal SIMRS — RSU Rajawali Citra</title>
 
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <meta name="theme-color" content="#1e3a5f">
 
@@ -24,16 +24,8 @@
     <main class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-8 space-y-6">
         {{-- Header Logo --}}
         <div class="text-center space-y-2">
-            <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-2.5 mb-1 focus:outline-none rounded-xl p-1" aria-label="Beranda Utama">
-                <div class="w-12 h-12 rounded-xl bg-blue-900 flex items-center justify-center text-white shrink-0 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" class="w-6 h-6" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                </div>
-                <div class="text-left">
-                    <div class="text-base font-extrabold text-slate-900 leading-tight">RSU Rajawali Citra</div>
-                    <div class="text-xs text-slate-500 font-medium">Bantul, DI Yogyakarta</div>
-                </div>
+            <a href="{{ route('home') }}" class="inline-flex items-center justify-center mb-1 focus:outline-none rounded-xl p-1" aria-label="Beranda Utama">
+                <img src="{{ asset('logo.png') }}" alt="Logo RSU Rajawali Citra" class="h-14 sm:h-16 w-auto object-contain">
             </a>
             <h1 class="text-xl font-black text-slate-900 tracking-tight">Portal SIMRS</h1>
             <p class="text-xs text-slate-500 font-medium">Sistem Informasi Manajemen Rumah Sakit</p>
@@ -94,12 +86,6 @@
                 <span>Masuk Ke Portal SIMRS</span>
             </button>
         </form>
-
-        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-600 space-y-1">
-            <div class="font-extrabold text-slate-800 flex items-center gap-1 mb-1"><i data-lucide="key-round" class="w-3.5 h-3.5 text-blue-900"></i> Akun Pengujian Demo:</div>
-            <div>• <strong>Super Admin</strong>: <code class="bg-slate-200 px-1 py-0.5 rounded text-slate-800 font-mono">superadmin</code> / <code class="bg-slate-200 px-1 py-0.5 rounded text-slate-800 font-mono">password</code></div>
-            <div>• <strong>Dokter</strong>: <code class="bg-slate-200 px-1 py-0.5 rounded text-slate-800 font-mono">dokter1</code> / <code class="bg-slate-200 px-1 py-0.5 rounded text-slate-800 font-mono">password</code></div>
-        </div>
 
         <div class="text-center pt-2 border-t border-slate-100">
             <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-900 font-semibold transition py-2">
