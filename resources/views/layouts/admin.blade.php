@@ -91,65 +91,105 @@
                     </a>
                 </div>
 
+                @canany(['manage-registrations', 'manage-polyclinic', 'manage-inpatient', 'manage-medical-records'])
                 <div>
                     <div class="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Pelayanan Medis</div>
                     <div class="space-y-1">
+                        @can('manage-registrations')
                         <a href="{{ route('registrations.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('registrations.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="user-plus" class="w-4 h-4"></i> Pendaftaran Pasien
                         </a>
+                        @endcan
+
+                        @can('manage-polyclinic')
                         <a href="{{ route('outpatients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('outpatients.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="stethoscope" class="w-4 h-4"></i> Rawat Jalan (Poli)
                         </a>
+                        @endcan
+
+                        @can('manage-inpatient')
                         <a href="{{ route('inpatients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('inpatients.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="bed" class="w-4 h-4"></i> Rawat Inap & Bed
                         </a>
+                        @endcan
+
+                        @can('manage-medical-records')
                         <a href="{{ route('medical-records.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('medical-records.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="folder-open" class="w-4 h-4"></i> Rekam Medis (EMR)
                         </a>
+                        @endcan
                     </div>
                 </div>
+                @endcanany
 
+                @canany(['manage-pharmacy', 'manage-laboratory', 'manage-warehouse'])
                 <div>
                     <div class="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Penunjang & Farmasi</div>
                     <div class="space-y-1">
+                        @can('manage-pharmacy')
                         <a href="{{ route('pharmacy.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('pharmacy.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="pill" class="w-4 h-4"></i> Farmasi & Obat
                         </a>
+                        @endcan
+
+                        @can('manage-laboratory')
                         <a href="{{ route('laboratory.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('laboratory.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="flask-conical" class="w-4 h-4"></i> Laboratorium
                         </a>
+                        @endcan
+
+                        @can('manage-warehouse')
                         <a href="{{ route('warehouse.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('warehouse.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="package-search" class="w-4 h-4"></i> Logistik & Gudang
                         </a>
+                        @endcan
                     </div>
                 </div>
+                @endcanany
 
+                @canany(['manage-cashier', 'view-reports'])
                 <div>
                     <div class="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Keuangan & Analitik</div>
                     <div class="space-y-1">
+                        @can('manage-cashier')
                         <a href="{{ route('billing.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('billing.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="receipt" class="w-4 h-4"></i> Kasir & Billing
                         </a>
+                        @endcan
+
+                        @can('view-reports')
                         <a href="{{ route('reports.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('reports.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Laporan & Analitik
                         </a>
+                        @endcan
                     </div>
                 </div>
+                @endcanany
 
+                @canany(['manage-master-data', 'manage-users', 'manage-settings'])
                 <div>
                     <div class="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Pengaturan & Reference</div>
                     <div class="space-y-1">
+                        @can('manage-master-data')
                         <a href="{{ route('master.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('master.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="database" class="w-4 h-4"></i> Master Data
                         </a>
+                        @endcan
+
+                        @can('manage-users')
                         <a href="{{ route('users.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('users.*') || request()->routeIs('roles.*') || request()->routeIs('activities.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="shield-check" class="w-4 h-4"></i> Manajemen User
                         </a>
+                        @endcan
+
+                        @can('manage-settings')
                         <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('settings.*') ? 'bg-teal-600/20 text-teal-400 border-l-2 border-teal-500 font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200' }}">
                             <i data-lucide="settings" class="w-4 h-4"></i> Pengaturan RS
                         </a>
+                        @endcan
                     </div>
                 </div>
+                @endcanany
             </nav>
         </aside>
 
@@ -188,10 +228,13 @@
                         </button>
 
                         <!-- Dropdown Menu -->
-                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-50">
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-50">
                             <div class="px-4 py-2.5 border-b border-slate-100">
-                                <p class="text-xs font-semibold text-slate-800">{{ auth()->user()->name ?? 'Super Admin' }}</p>
-                                <p class="text-[10px] text-slate-500 truncate">{{ auth()->user()->email ?? 'admin@simrs.com' }}</p>
+                                <p class="text-xs font-bold text-slate-900">{{ auth()->user()->name ?? 'Pengguna' }}</p>
+                                <p class="text-[10px] text-slate-500 truncate mb-1">{{ auth()->user()->email ?? 'user@simrs.com' }}</p>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-teal-50 text-teal-700 border border-teal-200">
+                                    Role: {{ auth()->user()->roles->pluck('name')->implode(', ') ?: 'Pasien' }}
+                                </span>
                             </div>
                             <a href="{{ route('users.profile') }}" class="flex items-center gap-2 px-4 py-2 text-xs text-slate-600 hover:bg-slate-50 hover:text-slate-900">
                                 <i data-lucide="user" class="w-4 h-4 text-slate-400"></i> Profil Akun

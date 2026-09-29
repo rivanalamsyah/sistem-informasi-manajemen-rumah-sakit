@@ -32,6 +32,8 @@ class RoleAndPermissionSeeder extends Seeder
         $permissions = [
             'manage-users' => 'Manajemen Akun Pengguna',
             'manage-master-data' => 'Manajemen Master Data',
+            'manage-warehouse' => 'Manajemen Gudang & Logistik',
+            'manage-settings' => 'Pengaturan Sistem & Backup',
             'view-dashboard' => 'Melihat Dashboard & Statistik',
             'manage-registrations' => 'Pendaftaran Pasien',
             'manage-polyclinic' => 'Pelayanan Poliklinik Rawat Jalan',
@@ -50,10 +52,25 @@ class RoleAndPermissionSeeder extends Seeder
             ]);
         }
 
-        // Attach permissions to roles
-        $superAdmin = Role::where('name', 'Super Admin')->first();
-        if ($superAdmin) {
-            $superAdmin->permissions()->sync(Permission::all());
+        // Map Permissions to Roles
+        $rolePermissionMap = [
+            'Super Admin' => array_keys($permissions),
+            'Admin' => ['view-dashboard', 'manage-users', 'manage-master-data', 'manage-warehouse', 'view-reports'],
+            'Dokter' => ['view-dashboard', 'manage-polyclinic', 'manage-medical-records'],
+            'Perawat' => ['view-dashboard', 'manage-polyclinic', 'manage-inpatient'],
+            'Apoteker' => ['view-dashboard', 'manage-pharmacy'],
+            'Petugas Laboratorium' => ['view-dashboard', 'manage-laboratory'],
+            'Petugas Pendaftaran' => ['view-dashboard', 'manage-registrations'],
+            'Kasir' => ['view-dashboard', 'manage-cashier'],
+            'Pasien' => ['view-dashboard'],
+        ];
+
+        foreach ($rolePermissionMap as $roleName => $permNames) {
+            $role = Role::where('name', $roleName)->first();
+            if ($role) {
+                $permissionIds = Permission::whereIn('name', $permNames)->pluck('id');
+                $role->permissions()->sync($permissionIds);
+            }
         }
     }
 }

@@ -94,6 +94,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Memeriksa apakah user memiliki permission tertentu melalui role miliknya.
+     */
+    public function hasPermission(string $permission): bool
+    {
+        if ($this->hasRole('Super Admin')) {
+            return true;
+        }
+
+        return $this->roles->flatMap->permissions->pluck('name')->contains($permission);
+    }
+
+    /**
      * Relasi ke profil Dokter jika akun ini milik seorang Dokter.
      */
     public function doctor(): HasOne
