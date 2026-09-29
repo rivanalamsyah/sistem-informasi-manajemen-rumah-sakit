@@ -14,6 +14,7 @@ return [
     'phone' => env('SIMRS_HOSPITAL_PHONE', '0821-3431-3535'),
     'email' => env('SIMRS_HOSPITAL_EMAIL', 'info@rsurajawalicitra.co.id'),
     'website' => env('SIMRS_HOSPITAL_WEBSITE', 'https://rsurajawalicitra.co.id'),
+    'google_maps_url' => env('SIMRS_HOSPITAL_MAPS_URL', 'https://maps.app.goo.gl/uasyyefyNzfUhqpZ8'),
     'hours' => 'Open 24 hours (Buka 24 Jam)',
     'province' => 'Daerah Istimewa Yogyakarta',
     'version' => 'v4.2.0 Enterprise',

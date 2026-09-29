@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\MedicalRecord;
+use App\Models\Registration;
 use App\Models\User;
+use App\Policies\MedicalRecordPolicy;
+use App\Policies\RegistrationPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Daftarkan semua Policy secara eksplisit
+        Gate::policy(Registration::class, RegistrationPolicy::class);
+        Gate::policy(MedicalRecord::class, MedicalRecordPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
+
         // Super Admin selalu diperbolehkan melewati semua gate checks
         Gate::before(function (User $user, string $ability) {
             if ($user->hasRole('Super Admin')) {

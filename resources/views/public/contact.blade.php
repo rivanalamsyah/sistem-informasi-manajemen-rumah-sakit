@@ -92,7 +92,7 @@
                 ['type'=>'Telepon RS','value'=>'+62 274-123-456','sub'=>'Senin – Minggu, 07.00 – 21.00','icon'=>'phone','color'=>'#2563eb','href'=>'tel:+62274123456'],
                 ['type'=>'WhatsApp CS','value'=>'0821-3431-3535','sub'=>'Respon cepat jam kerja','icon'=>'message-circle','color'=>'#16a34a','href'=>'https://wa.me/628213431353'],
                 ['type'=>'Email Resmi','value'=>'info@rsurajawalicitra.co.id','sub'=>'Dibalas dalam 1x24 jam','icon'=>'mail','color'=>'#7c3aed','href'=>'mailto:info@rsurajawalicitra.co.id'],
-                ['type'=>'Alamat Lokasi','value'=>'Jl. Pleret KM 2.5, Bantul','sub'=>'Banjardadap, Potorono','icon'=>'map-pin','color'=>'#0891b2','href'=>'https://maps.google.com/?q=RSU+Rajawali+Citra+Bantul'],
+                ['type'=>'Alamat Lokasi','value'=>'Jl. Pleret KM 2.5, Bantul','sub'=>'Banjardadap, Potorono','icon'=>'map-pin','color'=>'#0891b2','href'=>'https://maps.app.goo.gl/uasyyefyNzfUhqpZ8'],
             ];
             @endphp
             @foreach ($contacts as $contact)
@@ -121,18 +121,24 @@
                 <h2 class="section-title">Temukan Kami</h2>
                 
                 <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                    <div class="aspect-[16/9] bg-gradient-to-br from-blue-900/5 to-cyan-700/10 p-6 flex flex-col items-center justify-center text-center gap-3">
-                        <i data-lucide="map-pin" class="w-12 h-12 text-blue-900" aria-hidden="true"></i>
-                        <div>
-                            <div class="text-base font-extrabold text-slate-900 mb-1">RSU Rajawali Citra</div>
-                            <div class="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed mb-4">
-                                Jl. Pleret No. KM 2.5, Banjardadap, Potorono, Banguntapan, Bantul, DIY 55196
-                            </div>
-                            <a href="https://maps.google.com/?q=RSU+Rajawali+Citra+Bantul+Yogyakarta" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                                <i data-lucide="map" class="w-4 h-4" aria-hidden="true"></i>
-                                <span>Buka di Google Maps</span>
-                            </a>
+                    <div class="aspect-[16/9] w-full relative">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.440776147397!2d110.40773137366544!3d-7.848850977998022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a56c4442f9a19%3A0x620bd0f866a31124!2sRajawali%20Citra%20General%20Hospital!5e0!3m2!1sen!2sid!4v1790655244706!5m2!1sen!2sid"
+                            class="w-full h-full border-0"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            title="Lokasi RSU Rajawali Citra di Google Maps"
+                        ></iframe>
+                    </div>
+                    <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div class="text-xs text-slate-600 font-medium">
+                            <strong>RSU Rajawali Citra:</strong> Jl. Pleret KM 2.5, Potorono, Banguntapan, Bantul
                         </div>
+                        <a href="https://maps.app.goo.gl/uasyyefyNzfUhqpZ8" target="_blank" rel="noopener" class="btn btn-primary btn-sm shrink-0">
+                            <i data-lucide="map-pin" class="w-4 h-4" aria-hidden="true"></i>
+                            <span>Buka di Aplikasi Google Maps</span>
+                        </a>
                     </div>
                 </div>
 

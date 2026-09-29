@@ -48,6 +48,7 @@ class Invoice extends Model
         'discount',
         'grand_total',
         'status',
+        'notes',
         'created_by',
         'updated_by',
     ];

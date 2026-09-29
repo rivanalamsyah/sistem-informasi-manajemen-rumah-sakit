@@ -126,6 +126,44 @@ class DashboardService
             ->take(5)
             ->get();
 
+        // 8. Role-Specific Detailed Data Lists
+        $doctorQueueList = collect();
+        if ($user && $user->doctor) {
+            $doctorQueueList = Registration::with(['patient', 'queue.department'])
+                ->whereDate('registration_date', $today)
+                ->whereHas('queue', fn ($q) => $q->where('doctor_id', $user->doctor->id))
+                ->latest()
+                ->take(10)
+                ->get();
+        }
+
+        $pendingPrescriptionsList = Prescription::with(['medicalRecord.patient', 'doctor'])
+            ->where('status', Prescription::STATUS_PENDING)
+            ->latest()
+            ->take(10)
+            ->get();
+
+        $pendingLabOrdersList = LaboratoryOrder::with(['medicalRecord.patient', 'doctor'])
+            ->where('status', 'PENDING')
+            ->latest()
+            ->take(10)
+            ->get();
+
+        $activeInpatientList = InpatientVisit::with(['patient', 'bed.room.department', 'doctor'])
+            ->where('status', InpatientVisit::STATUS_ACTIVE)
+            ->latest('admission_date')
+            ->take(10)
+            ->get();
+
+        $pasienRegistrationsList = collect();
+        if ($user && $user->patient) {
+            $pasienRegistrationsList = Registration::with(['queue.department', 'queue.doctor'])
+                ->where('patient_id', $user->patient->id)
+                ->latest('registration_date')
+                ->take(10)
+                ->get();
+        }
+
         return [
             'roleContext' => $roleContext,
             'metrics' => [
@@ -147,6 +185,11 @@ class DashboardService
             ],
             'recentRegistrations' => $recentRegistrations,
             'activeDoctorsList' => $activeDoctorsList,
+            'doctorQueueList' => $doctorQueueList,
+            'pendingPrescriptionsList' => $pendingPrescriptionsList,
+            'pendingLabOrdersList' => $pendingLabOrdersList,
+            'activeInpatientList' => $activeInpatientList,
+            'pasienRegistrationsList' => $pasienRegistrationsList,
             'bedStatus' => [
                 'total' => $totalBeds,
                 'occupied' => $occupiedBeds,

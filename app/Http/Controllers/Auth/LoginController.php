@@ -32,10 +32,32 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
+            // Periksa status aktif akun setelah berhasil authenticate
+            if (! $user->is_active) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                // Catat percobaan login akun nonaktif
+                \App\Models\UserLogin::create([
+                    'user_id' => $user->id,
+                    'login_at' => now(),
+                    'ip_address' => $request->ip(),
+                    'user_agent' => substr($request->userAgent() ?? '', 0, 250),
+                    'browser' => 'Web Browser',
+                    'device' => 'Desktop/Mobile',
+                    'status' => 'Ditolak — Akun Nonaktif',
+                ]);
+
+                return back()->withErrors([
+                    'login' => 'Akun Anda telah dinonaktifkan. Hubungi Administrator sistem untuk informasi lebih lanjut.',
+                ])->onlyInput('login');
+            }
+
             // Update user last login
             $user->update(['last_login_at' => now()]);
 
-            // Catat UserLogin
+            // Catat UserLogin berhasil
             \App\Models\UserLogin::create([
                 'user_id' => $user->id,
                 'login_at' => now(),

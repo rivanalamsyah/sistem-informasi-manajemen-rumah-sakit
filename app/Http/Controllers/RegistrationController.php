@@ -26,6 +26,8 @@ class RegistrationController extends Controller
      */
     public function index(Request $request): View
     {
+        $this->authorize('viewAny', Registration::class);
+
         $today = now()->today();
 
         // Ringkasan Metrics Dashboard Pendaftaran
@@ -89,6 +91,8 @@ class RegistrationController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('create', Registration::class);
+
         $departments = Department::where('is_active', true)->get();
         $doctors = Doctor::with('department')->where('is_active', true)->get();
 
@@ -100,10 +104,12 @@ class RegistrationController extends Controller
      */
     public function store(StoreRegistrationRequest $request): RedirectResponse
     {
+        $this->authorize('create', Registration::class);
+
         $registration = $this->registrationService->registerPatient($request->validated());
 
         return redirect()->route('registrations.show', $registration)
-            ->with('success', "Pendaftaran Pasien berhasil! No. Registrasi: {$registration->registration_number}, No. Antrean: ".($registration->queue->queue_code ?? '-'));
+            ->with('success', "Pendaftaran Pasien berhasil! No. Registrasi: {$registration->registration_number}, No. Antrean: " . ($registration->queue->queue_code ?? '-'));
     }
 
     /**
@@ -111,6 +117,8 @@ class RegistrationController extends Controller
      */
     public function show(Registration $registration): View
     {
+        $this->authorize('view', $registration);
+
         $registration->load(['patient.registrations.queue.department', 'queue.department', 'queue.doctor']);
 
         return view('modules.registration.show', compact('registration'));
@@ -121,6 +129,8 @@ class RegistrationController extends Controller
      */
     public function edit(Registration $registration): View
     {
+        $this->authorize('update', $registration);
+
         $registration->load(['patient', 'queue']);
         $departments = Department::where('is_active', true)->get();
         $doctors = Doctor::where('is_active', true)->get();
@@ -133,16 +143,18 @@ class RegistrationController extends Controller
      */
     public function update(UpdateRegistrationRequest $request, Registration $registration): RedirectResponse
     {
+        $this->authorize('update', $registration);
+
         $registration->update([
             'status' => $request->status,
-            'notes' => $request->notes,
+            'notes'  => $request->notes,
         ]);
 
         if ($registration->queue) {
             $registration->queue->update([
                 'department_id' => $request->department_id,
-                'doctor_id' => $request->doctor_id,
-                'status' => $request->status === Registration::STATUS_CANCELLED ? Queue::STATUS_CANCELLED : $registration->queue->status,
+                'doctor_id'     => $request->doctor_id,
+                'status'        => $request->status === Registration::STATUS_CANCELLED ? Queue::STATUS_CANCELLED : $registration->queue->status,
             ]);
         }
 
@@ -155,6 +167,8 @@ class RegistrationController extends Controller
      */
     public function cancel(Request $request, Registration $registration): RedirectResponse
     {
+        $this->authorize('cancel', $registration);
+
         $registration->update(['status' => Registration::STATUS_CANCELLED]);
 
         if ($registration->queue) {
@@ -163,6 +177,20 @@ class RegistrationController extends Controller
 
         return redirect()->route('registrations.index')
             ->with('info', "Registrasi {$registration->registration_number} telah dibatalkan.");
+    }
+
+    /**
+     * Hapus (Soft Delete) Registrasi — hanya Super Admin & Admin.
+     */
+    public function destroy(Registration $registration): RedirectResponse
+    {
+        $this->authorize('delete', $registration);
+
+        $registrationNumber = $registration->registration_number;
+        $registration->delete();
+
+        return redirect()->route('registrations.index')
+            ->with('success', "Registrasi {$registrationNumber} berhasil dihapus dari sistem.");
     }
 
     /**

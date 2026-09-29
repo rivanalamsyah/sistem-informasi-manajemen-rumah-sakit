@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\ActivityLog;
 use App\Models\Role;
 use App\Models\User;
@@ -65,27 +67,17 @@ class UserController extends Controller
         return view('modules.user.create', compact('roles'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:150'],
-            'username' => ['required', 'string', 'max:50', 'unique:users,username'],
-            'email' => ['required', 'email', 'max:150', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8'],
-            'nik' => ['nullable', 'string', 'max:16', 'unique:users,nik'],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'roles' => ['nullable', 'array'],
-            'roles.*' => ['exists:roles,id'],
-            'is_active' => ['nullable', 'boolean'],
-        ]);
+        $validated = $request->validated();
 
         $user = User::create([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'nik' => $validated['nik'] ?? null,
-            'phone' => $validated['phone'] ?? null,
+            'name'      => $validated['name'],
+            'username'  => $validated['username'],
+            'email'     => $validated['email'],
+            'password'  => Hash::make($validated['password']),
+            'nik'       => $validated['nik'] ?? null,
+            'phone'     => $validated['phone'] ?? null,
             'is_active' => $request->boolean('is_active', true),
             'created_by' => Auth::id(),
         ]);
@@ -95,9 +87,9 @@ class UserController extends Controller
         }
 
         ActivityLog::create([
-            'user_id' => Auth::id(),
-            'module' => 'Manajemen User',
-            'action' => 'Tambah User',
+            'user_id'     => Auth::id(),
+            'module'      => 'Manajemen User',
+            'action'      => 'Tambah User',
             'description' => "Membuat akun pengguna baru: {$user->name} ({$user->username})",
         ]);
 
@@ -130,28 +122,18 @@ class UserController extends Controller
         return view('modules.user.edit', compact('user', 'roles', 'userRoleIds'));
     }
 
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:150'],
-            'username' => ['required', 'string', 'max:50', 'unique:users,username,'.$user->id],
-            'email' => ['required', 'email', 'max:150', 'unique:users,email,'.$user->id],
-            'nik' => ['nullable', 'string', 'max:16', 'unique:users,nik,'.$user->id],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'roles' => ['nullable', 'array'],
-            'roles.*' => ['exists:roles,id'],
-            'is_active' => ['nullable', 'boolean'],
-        ]);
-
+        $validated = $request->validated();
         $oldValues = $user->only(['name', 'username', 'email', 'nik', 'phone', 'is_active']);
 
         $user->update([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'nik' => $validated['nik'] ?? null,
-            'phone' => $validated['phone'] ?? null,
-            'is_active' => $request->boolean('is_active'),
+            'name'       => $validated['name'],
+            'username'   => $validated['username'],
+            'email'      => $validated['email'],
+            'nik'        => $validated['nik'] ?? null,
+            'phone'      => $validated['phone'] ?? null,
+            'is_active'  => $request->boolean('is_active'),
             'updated_by' => Auth::id(),
         ]);
 
@@ -160,12 +142,12 @@ class UserController extends Controller
         }
 
         ActivityLog::create([
-            'user_id' => Auth::id(),
-            'module' => 'Manajemen User',
-            'action' => 'Edit User',
+            'user_id'     => Auth::id(),
+            'module'      => 'Manajemen User',
+            'action'      => 'Edit User',
             'description' => "Memperbarui data akun pengguna {$user->name}",
-            'old_values' => $oldValues,
-            'new_values' => $user->fresh()->only(['name', 'username', 'email', 'nik', 'phone', 'is_active']),
+            'old_values'  => $oldValues,
+            'new_values'  => $user->fresh()->only(['name', 'username', 'email', 'nik', 'phone', 'is_active']),
         ]);
 
         return redirect()->route('users.index')

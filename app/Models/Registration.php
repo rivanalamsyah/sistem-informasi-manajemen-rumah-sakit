@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Model Registration untuk pendaftaran kunjungan medis pasien (Rawat Jalan/Inap/IGD).
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Registration extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public const TYPE_OUTPATIENT = 'Rawat Jalan';
 

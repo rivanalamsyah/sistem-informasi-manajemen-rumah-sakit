@@ -81,31 +81,50 @@ class RegistrationService
     }
 
     /**
-     * Menghasilkan Nomor Rekam Medis (No. RM) unik berurutan.
+     * Menghasilkan Nomor Rekam Medis (No. RM) unik berurutan secara atomik.
+     * Dipanggil dalam konteks DB::transaction sehingga lockForUpdate aman.
      */
     public function generateMrNumber(): string
     {
-        $maxId = Patient::withTrashed()->max('id') ?? 0;
-        $nextId = $maxId + 1;
+        $lastPatient = Patient::withTrashed()
+            ->lockForUpdate()
+            ->orderByDesc('id')
+            ->first(['id']);
 
-        return 'RM-'.str_pad((string) $nextId, 6, '0', STR_PAD_LEFT);
+        $nextId = ($lastPatient?->id ?? 0) + 1;
+
+        return 'RM-' . str_pad((string) $nextId, 6, '0', STR_PAD_LEFT);
     }
 
     /**
-     * Menghasilkan Nomor Registrasi Unik per Tanggal (REG-YYYYMMDD-XXXX).
+     * Menghasilkan Nomor Registrasi Unik per Tanggal (REG-YYYYMMDD-XXXX) secara atomik.
+     * Dipanggil dalam DB::transaction — lockForUpdate mencegah race condition.
      */
     public function generateRegistrationNumber(Carbon $date): string
     {
         $dateStr = $date->format('Ymd');
+        $dateOnly = $date->toDateString();
 
-        $countToday = Registration::whereDate('registration_date', $date->toDateString())->count();
-        $nextSeq = $countToday + 1;
+        // Lock registrasi terakhir hari ini untuk mendapatkan sequence yang benar
+        $lastReg = Registration::withTrashed()
+            ->lockForUpdate()
+            ->whereDate('registration_date', $dateOnly)
+            ->orderByDesc('id')
+            ->first(['id', 'registration_number']);
 
-        return 'REG-'.$dateStr.'-'.str_pad((string) $nextSeq, 4, '0', STR_PAD_LEFT);
+        $nextSeq = 1;
+        if ($lastReg && $lastReg->registration_number) {
+            $parts = explode('-', $lastReg->registration_number);
+            $lastSeq = (int) end($parts);
+            $nextSeq = $lastSeq + 1;
+        }
+
+        return 'REG-' . $dateStr . '-' . str_pad((string) $nextSeq, 4, '0', STR_PAD_LEFT);
     }
 
     /**
-     * Menghasilkan Nomor & Kode Antrean Poliklinik aman dari race condition.
+     * Menghasilkan Nomor & Kode Antrean Poliklinik secara atomik.
+     * Dipanggil dalam DB::transaction — lockForUpdate mencegah duplikat nomor antrian.
      */
     public function generateQueueData(int $departmentId, Carbon $date): array
     {
@@ -117,16 +136,18 @@ class RegistrationService
             $prefix = 'A';
         }
 
+        // Lock antrian terakhir untuk prevent concurrent duplicate
         $maxQueueNumber = Queue::where('department_id', $departmentId)
             ->whereDate('queue_date', $date->toDateString())
+            ->lockForUpdate()
             ->max('queue_number') ?? 0;
 
         $nextQueueNumber = $maxQueueNumber + 1;
-        $queueCode = $prefix.'-'.str_pad((string) $nextQueueNumber, 3, '0', STR_PAD_LEFT);
+        $queueCode = $prefix . '-' . str_pad((string) $nextQueueNumber, 3, '0', STR_PAD_LEFT);
 
         return [
             'number' => $nextQueueNumber,
-            'code' => $queueCode,
+            'code'   => $queueCode,
         ];
     }
 }
