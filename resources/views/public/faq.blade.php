@@ -6,7 +6,7 @@
 @section('content')
 <section class="page-hero" aria-label="FAQ">
     <div class="container-xl">
-        <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+        <nav class="breadcrumb mb-4" aria-label="Breadcrumb">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="breadcrumb-sep" aria-hidden="true">›</span>
             <a href="{{ route('information') }}">Informasi</a>
@@ -14,14 +14,18 @@
             <span aria-current="page">FAQ</span>
         </nav>
         <span class="section-label">FAQ</span>
-        <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--color-text-primary);margin-top:.75rem;margin-bottom:1rem;">Pertanyaan yang Sering<br>Diajukan</h1>
-        <p style="font-size:1.0625rem;color:var(--color-text-secondary);max-width:600px;line-height:1.75;">Temukan jawaban atas pertanyaan umum seputar layanan, prosedur, dan fasilitas RSU Rajawali Citra.</p>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-2 mb-4 leading-tight">
+            Pertanyaan yang Sering<br>Diajukan (FAQ)
+        </h1>
+        <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+            Temukan jawaban atas pertanyaan umum seputar layanan, prosedur pendaftaran, BPJS, dan fasilitas RSU Rajawali Citra.
+        </p>
     </div>
 </section>
 
-<section class="section" style="background:var(--color-surface);" aria-label="Daftar FAQ">
+<section class="section bg-white" aria-label="Daftar FAQ">
     <div class="container-xl">
-        <div style="max-width:800px;margin:0 auto;">
+        <div class="max-w-4xl mx-auto space-y-10">
             @php
             $faqGroups = [
                 ['group'=>'Pendaftaran & Kunjungan','faqs'=>[
@@ -47,29 +51,31 @@
             @endphp
 
             @foreach ($faqGroups as $gi => $group)
-            <div style="margin-bottom:2.5rem;">
-                <h2 style="font-size:1.0625rem;font-weight:800;color:var(--color-primary);margin-bottom:1rem;padding:.625rem 1rem;background:rgba(30,58,95,.05);border-radius:var(--radius-md);border-left:4px solid var(--color-primary);">{{ $group['group'] }}</h2>
-                <div role="list">
+            <div class="space-y-4">
+                <h2 class="text-base sm:text-lg font-extrabold text-blue-900 px-4 py-2 bg-blue-50/80 rounded-xl border-l-4 border-blue-900">
+                    {{ $group['group'] }}
+                </h2>
+                <div class="space-y-3" role="list">
                     @foreach ($group['faqs'] as $i => $faq)
                     @php $uid = $gi . '_' . $i; @endphp
-                    <div role="listitem" style="border:1px solid var(--color-border);border-radius:var(--radius-md);margin-bottom:.75rem;overflow:hidden;background:#fff;">
-                        <button id="faq-btn-{{ $uid }}" onclick="toggleGroupFaq('{{ $uid }}')" aria-expanded="false" aria-controls="faq-panel-{{ $uid }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.25rem;background:none;border:none;cursor:pointer;text-align:left;gap:1rem;">
-                            <span style="font-size:.9375rem;font-weight:600;color:var(--color-text-primary);">{{ $faq['q'] }}</span>
-                            <svg id="faq-icon-{{ $uid }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;color:var(--color-text-muted);flex-shrink:0;transition:transform .3s;" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                    <div role="listitem" class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <button id="faq-btn-{{ $uid }}" onclick="toggleGroupFaq('{{ $uid }}')" aria-expanded="false" aria-controls="faq-panel-{{ $uid }}" class="w-full flex items-center justify-between p-4 text-left bg-none border-none cursor-pointer gap-4 transition hover:bg-slate-50">
+                            <span class="text-xs sm:text-sm font-bold text-slate-900 leading-snug">{{ $faq['q'] }}</span>
+                            <svg id="faq-icon-{{ $uid }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                         </button>
-                        <div id="faq-panel-{{ $uid }}" role="region" aria-labelledby="faq-btn-{{ $uid }}" style="display:none;padding:0 1.25rem 1.125rem;font-size:.875rem;color:var(--color-text-secondary);line-height:1.7;">{{ $faq['a'] }}</div>
+                        <div id="faq-panel-{{ $uid }}" role="region" aria-labelledby="faq-btn-{{ $uid }}" class="hidden px-4 pb-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">{{ $faq['a'] }}</div>
                     </div>
                     @endforeach
                 </div>
             </div>
             @endforeach
 
-            <div style="text-align:center;padding:2rem;background:rgba(30,58,95,.04);border-radius:var(--radius-xl);border:1px solid var(--color-border);">
-                <p style="font-size:1rem;font-weight:600;color:var(--color-text-primary);margin-bottom:.5rem;">Tidak menemukan jawaban yang Anda cari?</p>
-                <p style="font-size:.875rem;color:var(--color-text-secondary);margin-bottom:1.5rem;">Hubungi kami langsung dan tim kami siap membantu Anda.</p>
-                <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;">
+            <div class="text-center p-8 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                <p class="text-base font-bold text-slate-900">Tidak menemukan jawaban yang Anda cari?</p>
+                <p class="text-xs sm:text-sm text-slate-600">Hubungi kami langsung dan tim layanan kami siap membantu Anda.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
                     <a href="{{ route('contact') }}" class="btn btn-primary">Hubungi Kami</a>
-                    <a href="https://wa.me/628213431353" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp</a>
+                    <a href="https://wa.me/628213431353" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp CS</a>
                 </div>
             </div>
         </div>
@@ -83,15 +89,17 @@ function toggleGroupFaq(uid) {
     const panel = document.getElementById('faq-panel-' + uid);
     const icon  = document.getElementById('faq-icon-' + uid);
     const btn   = document.getElementById('faq-btn-' + uid);
-    const isOpen = panel.style.display === 'block';
+    if (!panel) return;
+
+    const isOpen = !panel.classList.contains('hidden');
     if (!isOpen) {
-        panel.style.display = 'block';
-        icon.style.transform = 'rotate(180deg)';
-        btn.setAttribute('aria-expanded', 'true');
+        panel.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
     } else {
-        panel.style.display = 'none';
-        icon.style.transform = '';
-        btn.setAttribute('aria-expanded', 'false');
+        panel.classList.add('hidden');
+        if (icon) icon.style.transform = '';
+        if (btn) btn.setAttribute('aria-expanded', 'false');
     }
 }
 </script>

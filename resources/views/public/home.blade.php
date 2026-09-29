@@ -7,7 +7,7 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@@context": "https://schema.org",
+  "@context": "https://schema.org",
   "@type": "Hospital",
   "name": "RSU Rajawali Citra",
   "url": "{{ url('/') }}",
@@ -30,88 +30,104 @@
 @section('content')
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 1: HERO
+     SECTION 1: HERO (Fluid & Responsive Split Grid)
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section id="hero" style="
-    padding-top: 5rem;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(150deg, #f0f4ff 0%, #e8f4fd 40%, #f0f9ff 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-" aria-label="Beranda Utama RSU Rajawali Citra">
-    {{-- Background decoration --}}
-    <div aria-hidden="true" style="position:absolute;top:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);pointer-events:none;"></div>
-    <div aria-hidden="true" style="position:absolute;bottom:-10%;left:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(8,145,178,.06) 0%,transparent 70%);pointer-events:none;"></div>
+<section id="hero" class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 bg-gradient-to-br from-blue-50/80 via-slate-50 to-cyan-50/60 overflow-hidden" aria-label="Beranda Utama RSU Rajawali Citra">
+    {{-- Background decorations --}}
+    <div aria-hidden="true" class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div aria-hidden="true" class="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-    <div class="container-xl" style="padding-top:3rem;padding-bottom:4rem;position:relative;z-index:1;">
-        <div style="display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;">
+    <div class="container-xl relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {{-- Left Content --}}
-            <div style="max-width:680px;">
-                {{-- Trust badge --}}
-                <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.2);border-radius:100px;margin-bottom:1.5rem;">
-                    <span style="width:8px;height:8px;border-radius:50%;background:#16a34a;display:inline-block;animation:pulse-dot 2s ease-in-out infinite;" aria-hidden="true"></span>
-                    <span style="font-size:.75rem;font-weight:700;color:#15803d;letter-spacing:.04em;text-transform:uppercase;">Terakreditasi KARS Paripurna — RS Tipe B</span>
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                {{-- Accreditation Badge --}}
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-600/10 border border-emerald-600/20 rounded-full">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse-dot" aria-hidden="true"></span>
+                    <span class="text-xs font-extrabold text-emerald-800 uppercase tracking-wide">Terakreditasi KARS Paripurna — RS Tipe B</span>
                 </div>
 
-                <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--color-text-primary);line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em;">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-[1.15] tracking-tight">
                     Layanan Kesehatan<br>
-                    <span class="text-gradient">Terpercaya & Profesional</span><br>
+                    <span class="text-gradient">Terpercaya &amp; Profesional</span><br>
                     di Bantul, Yogyakarta
                 </h1>
 
-                <p style="font-size:1.0625rem;color:var(--color-text-secondary);line-height:1.75;margin-bottom:2rem;max-width:560px;">
-                    RSU Rajawali Citra hadir melayani kebutuhan kesehatan Anda dan keluarga dengan tenaga medis berpengalaman, fasilitas modern, dan layanan yang penuh perhatian.
+                <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                    RSU Rajawali Citra hadir melayani kebutuhan kesehatan Anda dan keluarga dengan tenaga medis berpengalaman, fasilitas modern, dan pelayanan humanis yang berpusat pada pasien.
                 </p>
 
-                <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;">
-                    <a href="{{ route('contact') }}#appointment" class="btn btn-primary btn-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-                        Buat Janji Temu
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+                    <a href="{{ route('contact') }}#appointment" class="btn btn-primary btn-lg w-full sm:w-auto shadow-lg shadow-blue-900/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                        <span>Buat Janji Temu</span>
                     </a>
-                    <a href="{{ route('doctors') }}" class="btn btn-outline btn-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        Cari Dokter
+                    <a href="{{ route('doctors') }}" class="btn btn-outline btn-lg w-full sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>Cari Dokter Spesialis</span>
                     </a>
                 </div>
 
-                {{-- Quick Stats --}}
-                <div style="display:flex;flex-wrap:wrap;gap:1.5rem;">
+                {{-- Quick Stats Banner --}}
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200/80">
                     @foreach ($stats as $stat)
-                    <div style="text-align:center;">
-                        <div style="font-size:1.5rem;font-weight:900;color:var(--color-primary);">{{ $stat['value'] }}</div>
-                        <div style="font-size:.75rem;color:var(--color-text-muted);font-weight:500;margin-top:.125rem;">{{ $stat['label'] }}</div>
+                    <div class="text-center lg:text-left">
+                        <div class="text-2xl lg:text-3xl font-black text-blue-900">{{ $stat['value'] }}</div>
+                        <div class="text-xs text-slate-500 font-semibold mt-0.5">{{ $stat['label'] }}</div>
                     </div>
                     @endforeach
                 </div>
             </div>
 
             {{-- Right: Hospital Info Cards --}}
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-                <div class="card" style="padding:1.5rem;grid-column:span 2;">
-                    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;">
-                        <div style="width:40px;height:40px;background:rgba(220,38,38,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#dc2626" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                {{-- Emergency Highlight Card --}}
+                <div class="card p-6 bg-white border-red-200 shadow-md sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#dc2626" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
                         </div>
                         <div>
-                            <div style="font-size:.8125rem;font-weight:700;color:var(--color-danger);display:flex;align-items:center;gap:.375rem;"><i data-lucide="siren" style="width:14px;height:14px;" aria-hidden="true"></i> IGD Darurat 24 Jam</div>
-                            <div style="font-size:1.125rem;font-weight:900;color:var(--color-text-primary);">+62 274-123-456</div>
+                            <div class="text-xs font-extrabold text-red-600 uppercase tracking-wider flex items-center gap-1.5">
+                                <i data-lucide="siren" class="w-4 h-4" aria-hidden="true"></i> IGD Darurat 24 Jam
+                            </div>
+                            <div class="text-xl font-black text-slate-900">+62 274-123-456</div>
                         </div>
                     </div>
-                    <a href="tel:+62274123456" class="btn btn-sm" style="width:100%;justify-content:center;background:#dc2626;color:#fff;border-color:#dc2626;">Hubungi Sekarang</a>
+                    <a href="tel:+62274123456" class="btn btn-sm w-full justify-center bg-red-600 hover:bg-red-700 text-white border-red-600 shadow-sm">
+                        Hubungi IGD Sekarang
+                    </a>
                 </div>
 
-                <div class="card" style="padding:1.25rem;">
-                    <div style="font-size:.8125rem;font-weight:600;color:var(--color-text-muted);margin-bottom:.5rem;">Jam Poliklinik</div>
-                    <div style="font-size:.9375rem;font-weight:700;color:var(--color-text-primary);">Sen–Sab</div>
-                    <div style="font-size:.875rem;color:var(--color-accent);font-weight:600;">07.00 – 20.00</div>
+                {{-- Polyclinic Hours Card --}}
+                <div class="card p-5 bg-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                            <i data-lucide="clock" class="w-5 h-5 text-blue-900" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold text-slate-400">Jam Poliklinik Rawat Jalan</div>
+                            <div class="text-sm font-bold text-slate-900">Senin – Sabtu: 07.00 – 20.00 WIB</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card" style="padding:1.25rem;">
-                    <div style="font-size:.8125rem;font-weight:600;color:var(--color-text-muted);margin-bottom:.5rem;">WhatsApp</div>
-                    <div style="font-size:.9375rem;font-weight:700;color:var(--color-text-primary);">0821-3431-3535</div>
-                    <a href="https://wa.me/628213431353" target="_blank" rel="noopener" style="font-size:.8125rem;color:var(--color-accent);font-weight:600;text-decoration:none;">Chat Sekarang →</a>
+                {{-- WhatsApp Support Card --}}
+                <div class="card p-5 bg-white">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+                                <i data-lucide="message-square" class="w-5 h-5 text-emerald-600" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs font-semibold text-slate-400">Layanan WhatsApp RS</div>
+                                <div class="text-sm font-bold text-slate-900">0821-3431-3535</div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/628213431353" target="_blank" rel="noopener" class="text-xs font-bold text-cyan-700 hover:text-cyan-800 underline underline-offset-2 shrink-0">
+                            Chat &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,51 +135,51 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 2: HOSPITAL HIGHLIGHTS (Quick Access)
+     SECTION 2: QUICK ACCESS GRID
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section style="background:#fff;padding:2.5rem 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);" aria-label="Akses Cepat">
+<section class="bg-white py-8 border-y border-slate-200" aria-label="Akses Cepat Layanan">
     <div class="container-xl">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;">
-            <a href="{{ route('services.detail', 'instalasi-gawat-darurat') }}" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(220,38,38,.04);border:1.5px solid rgba(220,38,38,.12);transition:all .2s;" onmouseover="this.style.background='rgba(220,38,38,.08)'" onmouseout="this.style.background='rgba(220,38,38,.04)'">
-                <div style="width:48px;height:48px;background:rgba(220,38,38,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#dc2626" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            <a href="{{ route('services.detail', 'instalasi-gawat-darurat') }}" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-red-50/60 border border-red-100 hover:bg-red-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-red-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#dc2626" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:var(--color-danger);text-align:center;">IGD 24 Jam</span>
+                <span class="text-xs font-bold text-red-700">IGD 24 Jam</span>
             </a>
 
-            <a href="{{ route('doctors') }}" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(30,58,95,.04);border:1.5px solid rgba(30,58,95,.12);transition:all .2s;" onmouseover="this.style.background='rgba(30,58,95,.08)'" onmouseout="this.style.background='rgba(30,58,95,.04)'">
-                <div style="width:48px;height:48px;background:rgba(30,58,95,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="var(--color-primary)" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <a href="{{ route('doctors') }}" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-blue-50/60 border border-blue-100 hover:bg-blue-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-blue-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#1e3a5f" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:var(--color-primary);text-align:center;">Cari Dokter</span>
+                <span class="text-xs font-bold text-blue-900">Cari Dokter</span>
             </a>
 
-            <a href="{{ route('services') }}" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(8,145,178,.04);border:1.5px solid rgba(8,145,178,.12);transition:all .2s;" onmouseover="this.style.background='rgba(8,145,178,.08)'" onmouseout="this.style.background='rgba(8,145,178,.04)'">
-                <div style="width:48px;height:48px;background:rgba(8,145,178,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="var(--color-accent)" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+            <a href="{{ route('services') }}" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-cyan-50/60 border border-cyan-100 hover:bg-cyan-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-cyan-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#0891b2" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:var(--color-accent);text-align:center;">Layanan</span>
+                <span class="text-xs font-bold text-cyan-700">Poliklinik</span>
             </a>
 
-            <a href="{{ route('services.detail', 'medical-check-up') }}" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(22,163,74,.04);border:1.5px solid rgba(22,163,74,.12);transition:all .2s;" onmouseover="this.style.background='rgba(22,163,74,.08)'" onmouseout="this.style.background='rgba(22,163,74,.04)'">
-                <div style="width:48px;height:48px;background:rgba(22,163,74,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#16a34a" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <a href="{{ route('services.detail', 'medical-check-up') }}" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-emerald-50/60 border border-emerald-100 hover:bg-emerald-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-emerald-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#16a34a" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:#16a34a;text-align:center;">Medical Check-Up</span>
+                <span class="text-xs font-bold text-emerald-700">Check-Up MCU</span>
             </a>
 
-            <a href="{{ route('contact') }}" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(124,58,237,.04);border:1.5px solid rgba(124,58,237,.12);transition:all .2s;" onmouseover="this.style.background='rgba(124,58,237,.08)'" onmouseout="this.style.background='rgba(124,58,237,.04)'">
-                <div style="width:48px;height:48px;background:rgba(124,58,237,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#7c3aed" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            <a href="{{ route('contact') }}" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-purple-50/60 border border-purple-100 hover:bg-purple-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-purple-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#7c3aed" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:#7c3aed;text-align:center;">Lokasi RS</span>
+                <span class="text-xs font-bold text-purple-700">Lokasi RS</span>
             </a>
 
-            <a href="{{ route('contact') }}#appointment" style="display:flex;flex-direction:column;align-items:center;gap:.625rem;padding:1.25rem 1rem;border-radius:var(--radius-lg);text-decoration:none;background:rgba(217,119,6,.04);border:1.5px solid rgba(217,119,6,.12);transition:all .2s;" onmouseover="this.style.background='rgba(217,119,6,.08)'" onmouseout="this.style.background='rgba(217,119,6,.04)'">
-                <div style="width:48px;height:48px;background:rgba(217,119,6,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#d97706" width="24" height="24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            <a href="{{ route('contact') }}#appointment" class="flex flex-col items-center justify-center p-4 rounded-xl text-center bg-amber-50/60 border border-amber-100 hover:bg-amber-100/70 transition group min-h-[96px]">
+                <div class="w-11 h-11 bg-amber-100 rounded-xl flex items-center justify-center mb-2 group-hover:scale-105 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#d97706" class="w-6 h-6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
                 </div>
-                <span style="font-size:.8125rem;font-weight:700;color:#d97706;text-align:center;">Buat Janji</span>
+                <span class="text-xs font-bold text-amber-700">Buat Janji</span>
             </a>
         </div>
     </div>
@@ -172,20 +188,20 @@
 {{-- ═══════════════════════════════════════════════════════════════════════════
      SECTION 3: MENGAPA MEMILIH RSU RAJAWALI CITRA
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Keunggulan RSU Rajawali Citra" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Keunggulan RSU Rajawali Citra">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:3rem;">
+        <div class="text-center mb-12">
             <span class="section-label">Keunggulan Kami</span>
             <h2 class="section-title">Mengapa Memilih RSU Rajawali Citra?</h2>
-            <p class="section-subtitle" style="margin:0 auto;">Kami hadir untuk memberikan pelayanan kesehatan terbaik dengan standar mutu tinggi, didukung fasilitas modern dan tenaga medis profesional.</p>
+            <p class="section-subtitle mx-auto">Kami hadir untuk memberikan pelayanan kesehatan terbaik dengan standar mutu tinggi, didukung fasilitas modern dan tenaga medis profesional.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
             $highlights = [
                 ['icon'=>'shield-check','title'=>'Terakreditasi KARS Paripurna','desc'=>'Telah memperoleh akreditasi tertinggi dari Komisi Akreditasi Rumah Sakit (KARS), menjamin standar mutu dan keselamatan pasien.','color'=>'#16a34a'],
-                ['icon'=>'users','title'=>'50+ Dokter Spesialis Berpengalaman','desc'=>'Tim dokter spesialis multidisiplin yang berpengalaman dan berdedikasi tinggi dalam menangani berbagai kondisi medis.','color'=>'var(--color-primary)'],
-                ['icon'=>'building-2','title'=>'Fasilitas Medis Modern','desc'=>'Dilengkapi peralatan diagnostik dan terapi terkini untuk mendukung proses diagnosis dan pengobatan yang akurat dan efektif.','color'=>'var(--color-accent)'],
+                ['icon'=>'users','title'=>'50+ Dokter Spesialis Berpengalaman','desc'=>'Tim dokter spesialis multidisiplin yang berpengalaman dan berdedikasi tinggi dalam menangani berbagai kondisi medis.','color'=>'#1e3a5f'],
+                ['icon'=>'building-2','title'=>'Fasilitas Medis Modern','desc'=>'Dilengkapi peralatan diagnostik dan terapi terkini untuk mendukung proses diagnosis dan pengobatan yang akurat dan efektif.','color'=>'#0891b2'],
                 ['icon'=>'clock','title'=>'Layanan 24 Jam IGD & Farmasi','desc'=>'IGD dan apotek beroperasi selama 24 jam penuh untuk memastikan pasien mendapat pertolongan kapan pun dibutuhkan.','color'=>'#d97706'],
                 ['icon'=>'heart-pulse','title'=>'Pelayanan Humanis & Empati','desc'=>'Kami percaya bahwa penyembuhan terbaik lahir dari perpaduan kompetensi medis dan perhatian yang tulus kepada pasien.','color'=>'#dc2626'],
                 ['icon'=>'credit-card','title'=>'Menerima BPJS & Asuransi','desc'=>'Melayani pasien BPJS Kesehatan, BPJS Ketenagakerjaan, dan berbagai asuransi kesehatan swasta untuk kemudahan akses.','color'=>'#7c3aed'],
@@ -193,12 +209,12 @@
             @endphp
 
             @foreach ($highlights as $h)
-            <div class="card" style="padding:1.75rem;">
-                <div style="width:48px;height:48px;border-radius:12px;background:{{ $h['color'] }}1a;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
-                    <i data-lucide="{{ $h['icon'] }}" style="width:24px;height:24px;color:{{ $h['color'] }};" aria-hidden="true"></i>
+            <div class="card p-6 flex flex-col h-full">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shrink-0" style="background-color: {{ $h['color'] }}1a">
+                    <i data-lucide="{{ $h['icon'] }}" class="w-6 h-6" style="color: {{ $h['color'] }}" aria-hidden="true"></i>
                 </div>
-                <h3 style="font-size:1rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem;">{{ $h['title'] }}</h3>
-                <p style="font-size:.875rem;color:var(--color-text-secondary);line-height:1.65;">{{ $h['desc'] }}</p>
+                <h3 class="text-base font-bold text-slate-900 mb-2">{{ $h['title'] }}</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed flex-1">{{ $h['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -210,28 +226,31 @@
 ═══════════════════════════════════════════════════════════════════════════ --}}
 <section class="section section-alt" aria-label="Layanan Unggulan">
     <div class="container-xl">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
                 <span class="section-label">Layanan Kami</span>
-                <h2 class="section-title" style="margin-bottom:.5rem;">Layanan Kesehatan Unggulan</h2>
+                <h2 class="section-title">Layanan Kesehatan Unggulan</h2>
                 <p class="section-subtitle">Kami menyediakan layanan medis komprehensif untuk semua kebutuhan kesehatan Anda.</p>
             </div>
-            <a href="{{ route('services') }}" class="btn btn-outline" style="flex-shrink:0;">Lihat Semua Layanan →</a>
+            <a href="{{ route('services') }}" class="btn btn-outline shrink-0 self-start md:self-auto">Lihat Semua Layanan &rarr;</a>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($services as $service)
             @php
             $colorMap = ['red'=>'#dc2626','blue'=>'#2563eb','green'=>'#16a34a','purple'=>'#7c3aed','cyan'=>'#0891b2','orange'=>'#d97706','teal'=>'#0f766e','pink'=>'#be185d'];
             $clr = $colorMap[$service['color']] ?? '#2563eb';
             @endphp
-            <a href="{{ route('services.detail', $service['slug']) }}" class="card" style="padding:1.5rem;text-decoration:none;display:block;">
-                <div style="width:48px;height:48px;border-radius:12px;background:{{ $clr }}1a;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
-                    <i data-lucide="{{ $service['icon'] }}" style="width:24px;height:24px;color:{{ $clr }};" aria-hidden="true"></i>
+            <a href="{{ route('services.detail', $service['slug']) }}" class="card p-6 flex flex-col h-full text-left group no-underline">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shrink-0" style="background-color: {{ $clr }}1a">
+                    <i data-lucide="{{ $service['icon'] }}" class="w-6 h-6" style="color: {{ $clr }}" aria-hidden="true"></i>
                 </div>
-                <h3 style="font-size:.9375rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.4rem;">{{ $service['name'] }}</h3>
-                <p style="font-size:.8125rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1rem;">{{ $service['short'] }}</p>
-                <span style="font-size:.8125rem;font-weight:600;color:{{ $clr }};">Selengkapnya →</span>
+                <h3 class="text-base font-bold text-slate-900 mb-2 group-hover:text-blue-900 transition">{{ $service['name'] }}</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 flex-1">{{ $service['short'] }}</p>
+                <div class="text-xs font-bold inline-flex items-center gap-1 mt-auto" style="color: {{ $clr }}">
+                    <span>Selengkapnya</span>
+                    <span class="group-hover:translate-x-1 transition">&rarr;</span>
+                </div>
             </a>
             @endforeach
         </div>
@@ -241,33 +260,34 @@
 {{-- ═══════════════════════════════════════════════════════════════════════════
      SECTION 5: DOKTER UNGGULAN
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Dokter Spesialis Kami" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Dokter Spesialis Kami">
     <div class="container-xl">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
                 <span class="section-label">Tim Dokter</span>
-                <h2 class="section-title" style="margin-bottom:.5rem;">Dokter Spesialis Kami</h2>
-                <p class="section-subtitle">Ditangani oleh dokter spesialis berpengalaman dan berdedikasi.</p>
+                <h2 class="section-title">Dokter Spesialis Kami</h2>
+                <p class="section-subtitle">Ditangani oleh dokter spesialis berpengalaman dan berdedikasi tinggi.</p>
             </div>
-            <a href="{{ route('doctors') }}" class="btn btn-outline" style="flex-shrink:0;">Semua Dokter →</a>
+            <a href="{{ route('doctors') }}" class="btn btn-outline shrink-0 self-start md:self-auto">Semua Dokter &rarr;</a>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach (array_slice($doctors, 0, 4) as $doctor)
             @php
             $colorMap = ['blue'=>'#2563eb','pink'=>'#be185d','green'=>'#16a34a','orange'=>'#d97706','red'=>'#dc2626','purple'=>'#7c3aed'];
             $clr = $colorMap[$doctor['color']] ?? '#2563eb';
             @endphp
-            <a href="{{ route('doctors.detail', $doctor['slug']) }}" class="card" style="padding:1.5rem;text-decoration:none;text-align:center;display:block;">
-                <div style="width:72px;height:72px;border-radius:50%;background:{{ $clr }}1a;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;border:3px solid {{ $clr }}30;">
-                    <span style="font-size:1.5rem;font-weight:800;color:{{ $clr }};">{{ $doctor['initials'] }}</span>
+            <a href="{{ route('doctors.detail', $doctor['slug']) }}" class="card p-6 text-center flex flex-col h-full group no-underline">
+                <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border-4 shrink-0" style="background-color: {{ $clr }}1a; border-color: {{ $clr }}30">
+                    <span class="text-2xl font-black" style="color: {{ $clr }}">{{ $doctor['initials'] }}</span>
                 </div>
-                <h3 style="font-size:.9375rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.25rem;">{{ $doctor['name'] }}</h3>
-                <p style="font-size:.8125rem;color:{{ $clr }};font-weight:600;margin-bottom:.75rem;">{{ $doctor['specialization'] }}</p>
-                <div style="font-size:.75rem;color:var(--color-text-muted);">{{ $doctor['polyclinic'] }}</div>
-                <div style="margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--color-border);">
+                <h3 class="text-base font-bold text-slate-900 mb-1 group-hover:text-blue-900 transition">{{ $doctor['name'] }}</h3>
+                <p class="text-xs font-bold mb-2" style="color: {{ $clr }}">{{ $doctor['specialization'] }}</p>
+                <div class="text-xs text-slate-400 mb-4">{{ $doctor['polyclinic'] }}</div>
+                
+                <div class="mt-auto pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-1">
                     @foreach (array_slice($doctor['schedule'], 0, 2) as $sched)
-                    <div style="font-size:.75rem;color:var(--color-text-secondary);">{{ $sched['day'] }}: {{ $sched['time'] }}</div>
+                    <div><span class="font-semibold">{{ $sched['day'] }}:</span> {{ $sched['time'] }}</div>
                     @endforeach
                 </div>
             </a>
@@ -277,15 +297,16 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 6: HOSPITAL FACTS / STATISTIK
+     SECTION 6: STATISTIK & FAKTA RUMAH SAKIT
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section style="background:var(--color-primary);padding:4rem 0;" aria-label="Data Rumah Sakit">
+<section class="bg-blue-900 py-12 lg:py-16 text-white" aria-label="Data Rumah Sakit">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:2.5rem;">
-            <span class="section-label" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);">RSU Rajawali Citra dalam Angka</span>
-            <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-top:.5rem;">Bukti Komitmen Kami untuk Kesehatan Anda</h2>
+        <div class="text-center mb-10">
+            <span class="section-label bg-white/10 text-white/90">RSU Rajawali Citra dalam Angka</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Bukti Komitmen Kami untuk Kesehatan Anda</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:2rem;text-align:center;">
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 text-center">
             @php
             $hospitalFacts = [
                 ['value'=>'120+','label'=>'Tempat Tidur','sub'=>'VVIP, VIP, Kelas I–III'],
@@ -296,10 +317,10 @@
             ];
             @endphp
             @foreach ($hospitalFacts as $fact)
-            <div>
-                <div style="font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;line-height:1.1;">{{ $fact['value'] }}</div>
-                <div style="font-size:.9375rem;font-weight:700;color:rgba(255,255,255,.9);margin-top:.25rem;">{{ $fact['label'] }}</div>
-                <div style="font-size:.75rem;color:rgba(255,255,255,.6);margin-top:.25rem;">{{ $fact['sub'] }}</div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-3xl sm:text-4xl font-black text-white leading-tight">{{ $fact['value'] }}</div>
+                <div class="text-sm font-bold text-white/90 mt-1">{{ $fact['label'] }}</div>
+                <div class="text-xs text-white/60 mt-0.5">{{ $fact['sub'] }}</div>
             </div>
             @endforeach
         </div>
@@ -307,42 +328,48 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 7: JADWAL DOKTER (ringkasan)
+     SECTION 7: JADWAL DOKTER TABEL RESPONSIVE
 ═══════════════════════════════════════════════════════════════════════════ --}}
 <section class="section section-alt" aria-label="Jadwal Dokter">
     <div class="container-xl">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
                 <span class="section-label primary">Jadwal Praktik</span>
-                <h2 class="section-title" style="margin-bottom:.5rem;">Jadwal Dokter Hari Ini</h2>
+                <h2 class="section-title">Jadwal Dokter Hari Ini</h2>
                 <p class="section-subtitle">Temukan dokter dan jadwal praktik yang sesuai dengan kebutuhan Anda.</p>
             </div>
-            <a href="{{ route('doctors') }}" class="btn btn-primary" style="flex-shrink:0;">Lihat Semua Jadwal</a>
+            <a href="{{ route('doctors') }}" class="btn btn-primary shrink-0 self-start md:self-auto">Lihat Semua Jadwal</a>
         </div>
 
-        <div style="background:var(--color-surface);border-radius:var(--radius-lg);border:1px solid var(--color-border);overflow:hidden;box-shadow:var(--shadow-sm);">
-            <div style="overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:.875rem;">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm border-collapse">
                     <thead>
-                        <tr style="background:var(--color-primary);color:#fff;">
-                            <th style="padding:.875rem 1.25rem;text-align:left;font-weight:600;font-size:.8125rem;white-space:nowrap;">Dokter</th>
-                            <th style="padding:.875rem 1.25rem;text-align:left;font-weight:600;font-size:.8125rem;white-space:nowrap;">Spesialisasi</th>
-                            <th style="padding:.875rem 1.25rem;text-align:left;font-weight:600;font-size:.8125rem;white-space:nowrap;">Poliklinik</th>
-                            <th style="padding:.875rem 1.25rem;text-align:left;font-weight:600;font-size:.8125rem;white-space:nowrap;">Jadwal</th>
+                        <tr class="bg-blue-900 text-white">
+                            <th class="py-3.5 px-5 font-bold text-xs whitespace-nowrap">Dokter</th>
+                            <th class="py-3.5 px-5 font-bold text-xs whitespace-nowrap">Spesialisasi</th>
+                            <th class="py-3.5 px-5 font-bold text-xs whitespace-nowrap">Poliklinik</th>
+                            <th class="py-3.5 px-5 font-bold text-xs whitespace-nowrap">Jadwal Praktik</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-slate-100">
                         @foreach ($doctors as $i => $doctor)
-                        <tr style="border-bottom:1px solid var(--color-border);background:{{ $i % 2 === 0 ? '#fff' : '#fafbfc' }};" onmouseover="this.style.background='rgba(30,58,95,.04)'" onmouseout="this.style.background='{{ $i % 2 === 0 ? '#fff' : '#fafbfc' }}'">
-                            <td style="padding:.875rem 1.25rem;">
-                                <a href="{{ route('doctors.detail', $doctor['slug']) }}" style="font-weight:700;color:var(--color-primary);text-decoration:none;">{{ $doctor['name'] }}</a>
+                        <tr class="{{ $i % 2 === 0 ? 'bg-white' : 'bg-slate-50/50' }} hover:bg-blue-50/50 transition">
+                            <td class="py-3.5 px-5">
+                                <a href="{{ route('doctors.detail', $doctor['slug']) }}" class="font-bold text-blue-900 hover:underline">
+                                    {{ $doctor['name'] }}
+                                </a>
                             </td>
-                            <td style="padding:.875rem 1.25rem;color:var(--color-text-secondary);">{{ $doctor['specialization'] }}</td>
-                            <td style="padding:.875rem 1.25rem;color:var(--color-text-secondary);">{{ $doctor['polyclinic'] }}</td>
-                            <td style="padding:.875rem 1.25rem;">
-                                @foreach ($doctor['schedule'] as $s)
-                                <span style="display:inline-block;font-size:.75rem;background:rgba(30,58,95,.08);color:var(--color-primary);padding:.2rem .6rem;border-radius:100px;margin:.125rem;font-weight:600;">{{ $s['day'] }}: {{ $s['time'] }}</span>
-                                @endforeach
+                            <td class="py-3.5 px-5 text-slate-600">{{ $doctor['specialization'] }}</td>
+                            <td class="py-3.5 px-5 text-slate-600">{{ $doctor['polyclinic'] }}</td>
+                            <td class="py-3.5 px-5">
+                                <div class="flex flex-wrap gap-1.5">
+                                    @foreach ($doctor['schedule'] as $s)
+                                    <span class="text-xs bg-blue-100/70 text-blue-900 px-2.5 py-0.5 rounded-full font-semibold whitespace-nowrap">
+                                        {{ $s['day'] }}: {{ $s['time'] }}
+                                    </span>
+                                    @endforeach
+                                </div>
                             </td>
                         </tr>
                         @endforeach
@@ -356,15 +383,15 @@
 {{-- ═══════════════════════════════════════════════════════════════════════════
      SECTION 8: FASILITAS UNGGULAN
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Fasilitas Rumah Sakit" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Fasilitas Rumah Sakit">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:3rem;">
+        <div class="text-center mb-12">
             <span class="section-label">Fasilitas</span>
             <h2 class="section-title">Fasilitas Rumah Sakit Modern</h2>
-            <p class="section-subtitle" style="margin:0 auto;">Didukung oleh peralatan medis terkini dan fasilitas pendukung yang nyaman untuk pasien dan keluarga.</p>
+            <p class="section-subtitle mx-auto">Didukung oleh peralatan medis terkini dan fasilitas pendukung yang nyaman untuk pasien dan keluarga.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
             $facilities = [
                 ['title'=>'Ruang Operasi Modern','desc'=>'3 kamar operasi dilengkapi peralatan bedah terkini dan sistem sterilisasi standar internasional.','icon'=>'scissors','color'=>'#2563eb'],
@@ -376,12 +403,12 @@
             ];
             @endphp
             @foreach ($facilities as $f)
-            <div style="background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1.75rem;border-left:4px solid {{ $f['color'] }};">
-                <div style="width:44px;height:44px;border-radius:10px;background:{{ $f['color'] }}15;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
-                    <i data-lucide="{{ $f['icon'] }}" style="width:22px;height:22px;color:{{ $f['color'] }};" aria-hidden="true"></i>
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 border-l-4 flex flex-col h-full" style="border-left-color: {{ $f['color'] }}">
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4 shrink-0" style="background-color: {{ $f['color'] }}1a">
+                    <i data-lucide="{{ $f['icon'] }}" class="w-5 h-5" style="color: {{ $f['color'] }}" aria-hidden="true"></i>
                 </div>
-                <h3 style="font-size:1rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.5rem;">{{ $f['title'] }}</h3>
-                <p style="font-size:.8125rem;color:var(--color-text-secondary);line-height:1.65;">{{ $f['desc'] }}</p>
+                <h3 class="text-base font-bold text-slate-900 mb-2">{{ $f['title'] }}</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed flex-1">{{ $f['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -389,16 +416,16 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 9: POLIKLINIK
+     SECTION 9: DAFTAR POLIKLINIK
 ═══════════════════════════════════════════════════════════════════════════ --}}
 <section class="section section-alt" aria-label="Daftar Poliklinik">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:2.5rem;">
+        <div class="text-center mb-10">
             <span class="section-label primary">Poliklinik</span>
             <h2 class="section-title">15+ Poliklinik Spesialis</h2>
-            <p class="section-subtitle" style="margin:0 auto;">Tersedia poliklinik spesialis dan subspesialis untuk melayani berbagai kebutuhan kesehatan Anda.</p>
+            <p class="section-subtitle mx-auto">Tersedia poliklinik spesialis dan subspesialis untuk melayani berbagai kebutuhan kesehatan Anda.</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem;">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             @php
             $polyclinics = [
                 'Poli Umum','Poli Anak','Poli Kandungan','Poli Jantung','Poli Bedah Umum',
@@ -407,48 +434,52 @@
             ];
             @endphp
             @foreach ($polyclinics as $poli)
-            <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:.875rem 1rem;display:flex;align-items:center;gap:.625rem;font-size:.875rem;font-weight:500;color:var(--color-text-primary);">
-                <span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent);flex-shrink:0;" aria-hidden="true"></span>
-                {{ $poli }}
+            <div class="bg-white border border-slate-200 rounded-xl p-3.5 flex items-center gap-2.5 text-xs font-semibold text-slate-800 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-cyan-600 shrink-0" aria-hidden="true"></span>
+                <span class="truncate">{{ $poli }}</span>
             </div>
             @endforeach
         </div>
-        <div style="text-align:center;margin-top:2rem;">
+        <div class="text-center mt-8">
             <a href="{{ route('services') }}" class="btn btn-primary">Lihat Semua Layanan</a>
         </div>
     </div>
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 10: INFORMASI KESEHATAN (ARTIKEL)
+     SECTION 10: ARTIKEL KESEHATAN
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Artikel Kesehatan" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Artikel Kesehatan">
     <div class="container-xl">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
                 <span class="section-label">Edukasi Kesehatan</span>
-                <h2 class="section-title" style="margin-bottom:.5rem;">Artikel & Informasi Kesehatan</h2>
+                <h2 class="section-title">Artikel &amp; Informasi Kesehatan</h2>
                 <p class="section-subtitle">Tips dan informasi kesehatan dari para dokter spesialis kami.</p>
             </div>
-            <a href="{{ route('articles') }}" class="btn btn-outline" style="flex-shrink:0;">Semua Artikel →</a>
+            <a href="{{ route('articles') }}" class="btn btn-outline shrink-0 self-start md:self-auto">Semua Artikel &rarr;</a>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
             $colorMap = ['red'=>'#dc2626','blue'=>'#2563eb','green'=>'#16a34a','orange'=>'#d97706'];
             @endphp
             @foreach ($articles as $article)
             @php $clr = $colorMap[$article['color']] ?? '#2563eb'; @endphp
-            <article class="card" style="text-decoration:none;overflow:hidden;">
-                <div style="background:{{ $clr }}12;padding:1.5rem;border-bottom:1px solid {{ $clr }}20;">
-                    <span style="display:inline-flex;align-items:center;padding:.25rem .75rem;background:{{ $clr }}15;color:{{ $clr }};border-radius:100px;font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">{{ $article['category'] }}</span>
+            <article class="card flex flex-col h-full overflow-hidden">
+                <div class="p-5 border-b border-slate-100" style="background-color: {{ $clr }}0d">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-wide" style="background-color: {{ $clr }}1a; color: {{ $clr }}">
+                        {{ $article['category'] }}
+                    </span>
                 </div>
-                <div style="padding:1.5rem;">
-                    <h3 style="font-size:1rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.625rem;line-height:1.4;">
-                        <a href="{{ route('articles.detail', $article['slug']) }}" style="text-decoration:none;color:inherit;">{{ $article['title'] }}</a>
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug">
+                        <a href="{{ route('articles.detail', $article['slug']) }}" class="hover:text-blue-900 transition no-underline">
+                            {{ $article['title'] }}
+                        </a>
                     </h3>
-                    <p style="font-size:.875rem;color:var(--color-text-secondary);line-height:1.65;margin-bottom:1rem;">{{ $article['excerpt'] }}</p>
-                    <div style="display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:var(--color-text-muted);">
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 flex-1">{{ $article['excerpt'] }}</p>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mt-auto pt-3 border-t border-slate-100">
                         <span>{{ $article['author'] }}</span>
                         <span>{{ $article['date'] }}</span>
                     </div>
@@ -464,34 +495,38 @@
 ═══════════════════════════════════════════════════════════════════════════ --}}
 <section class="section section-alt" aria-label="Berita Terbaru">
     <div class="container-xl">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
-                <span class="section-label primary">Berita & Pengumuman</span>
-                <h2 class="section-title" style="margin-bottom:.5rem;">Berita Terbaru</h2>
+                <span class="section-label primary">Berita &amp; Pengumuman</span>
+                <h2 class="section-title">Berita Terbaru</h2>
                 <p class="section-subtitle">Informasi terkini seputar RSU Rajawali Citra dan program layanan kami.</p>
             </div>
-            <a href="{{ route('news') }}" class="btn btn-outline" style="flex-shrink:0;">Semua Berita →</a>
+            <a href="{{ route('news') }}" class="btn btn-outline shrink-0 self-start md:self-auto">Semua Berita &rarr;</a>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
             $colorMap = ['blue'=>'#2563eb','green'=>'#16a34a','orange'=>'#d97706'];
             @endphp
             @foreach ($news as $item)
             @php $clr = $colorMap[$item['color']] ?? '#2563eb'; @endphp
-            <article class="card" style="display:flex;flex-direction:column;">
-                <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;">
+            <article class="card flex flex-col h-full">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
                     <span class="badge badge-{{ $item['color'] }}">{{ $item['category'] }}</span>
-                    <time style="font-size:.75rem;color:var(--color-text-muted);" datetime="{{ $item['date'] }}">{{ $item['date'] }}</time>
+                    <time class="text-xs text-slate-400" datetime="{{ $item['date'] }}">{{ $item['date'] }}</time>
                 </div>
-                <div style="padding:1.25rem 1.5rem;flex:1;">
-                    <h3 style="font-size:.9375rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.625rem;line-height:1.4;">
-                        <a href="{{ route('news.detail', $item['slug']) }}" style="text-decoration:none;color:inherit;">{{ $item['title'] }}</a>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug">
+                        <a href="{{ route('news.detail', $item['slug']) }}" class="hover:text-blue-900 transition no-underline">
+                            {{ $item['title'] }}
+                        </a>
                     </h3>
-                    <p style="font-size:.8125rem;color:var(--color-text-secondary);line-height:1.6;">{{ $item['excerpt'] }}</p>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 flex-1">{{ $item['excerpt'] }}</p>
                 </div>
-                <div style="padding:.875rem 1.5rem;border-top:1px solid var(--color-border);">
-                    <a href="{{ route('news.detail', $item['slug']) }}" style="font-size:.8125rem;font-weight:600;color:{{ $clr }};text-decoration:none;">Baca Selengkapnya →</a>
+                <div class="p-4 border-t border-slate-100 mt-auto">
+                    <a href="{{ route('news.detail', $item['slug']) }}" class="text-xs font-bold no-underline" style="color: {{ $clr }}">
+                        Baca Selengkapnya &rarr;
+                    </a>
                 </div>
             </article>
             @endforeach
@@ -502,15 +537,15 @@
 {{-- ═══════════════════════════════════════════════════════════════════════════
      SECTION 12: TESTIMONI PASIEN
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Testimoni Pasien" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Testimoni Pasien">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:3rem;">
+        <div class="text-center mb-12">
             <span class="section-label">Testimoni</span>
             <h2 class="section-title">Apa Kata Pasien Kami</h2>
-            <p class="section-subtitle" style="margin:0 auto;">Kepercayaan pasien adalah motivasi terbesar kami untuk terus meningkatkan kualitas pelayanan.</p>
+            <p class="section-subtitle mx-auto">Kepercayaan pasien adalah motivasi terbesar kami untuk terus meningkatkan kualitas pelayanan.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
             $testimonials = [
                 ['name'=>'Ibu Ratna Wulandari','role'=>'Pasien Poliklinik Anak','text'=>'Dokter anak di sini sangat sabar dan teliti menangani anak saya. Pelayanannya ramah dan tidak membuat anak takut. Fasilitas ruang tunggu juga nyaman.','initials'=>'RW','color'=>'#2563eb'],
@@ -519,22 +554,22 @@
             ];
             @endphp
             @foreach ($testimonials as $t)
-            <figure style="background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1.75rem;margin:0;">
-                <div style="display:flex;gap:.25rem;color:#f59e0b;margin-bottom:1rem;" aria-label="5 dari 5 bintang">
-                    <i data-lucide="star" style="width:16px;height:16px;fill:#f59e0b;color:#f59e0b;" aria-hidden="true"></i>
-                    <i data-lucide="star" style="width:16px;height:16px;fill:#f59e0b;color:#f59e0b;" aria-hidden="true"></i>
-                    <i data-lucide="star" style="width:16px;height:16px;fill:#f59e0b;color:#f59e0b;" aria-hidden="true"></i>
-                    <i data-lucide="star" style="width:16px;height:16px;fill:#f59e0b;color:#f59e0b;" aria-hidden="true"></i>
-                    <i data-lucide="star" style="width:16px;height:16px;fill:#f59e0b;color:#f59e0b;" aria-hidden="true"></i>
+            <figure class="bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col h-full m-0">
+                <div class="flex gap-1 text-amber-400 mb-3" aria-label="5 dari 5 bintang">
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400" aria-hidden="true"></i>
                 </div>
-                <blockquote style="font-size:.9rem;color:var(--color-text-primary);line-height:1.7;margin-bottom:1.25rem;font-style:italic;">"{{ $t['text'] }}"</blockquote>
-                <figcaption style="display:flex;align-items:center;gap:.75rem;">
-                    <div style="width:42px;height:42px;border-radius:50%;background:{{ $t['color'] }}20;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                        <span style="font-size:.875rem;font-weight:800;color:{{ $t['color'] }};">{{ $t['initials'] }}</span>
+                <blockquote class="text-xs sm:text-sm text-slate-700 leading-relaxed italic mb-6 flex-1">"{{ $t['text'] }}"</blockquote>
+                <figcaption class="flex items-center gap-3 mt-auto pt-4 border-t border-slate-200">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold text-sm shrink-0" style="background-color: {{ $t['color'] }}20; color: {{ $t['color'] }}">
+                        {{ $t['initials'] }}
                     </div>
                     <div>
-                        <div style="font-size:.875rem;font-weight:700;color:var(--color-text-primary);">{{ $t['name'] }}</div>
-                        <div style="font-size:.75rem;color:var(--color-text-muted);">{{ $t['role'] }}</div>
+                        <div class="text-sm font-bold text-slate-900">{{ $t['name'] }}</div>
+                        <div class="text-xs text-slate-500">{{ $t['role'] }}</div>
                     </div>
                 </figcaption>
             </figure>
@@ -546,12 +581,12 @@
 {{-- ═══════════════════════════════════════════════════════════════════════════
      SECTION 13: AKREDITASI & KEPERCAYAAN
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section style="background:#f0f4ff;padding:3rem 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);" aria-label="Akreditasi dan Kepercayaan">
+<section class="bg-slate-100 py-10 border-y border-slate-200" aria-label="Akreditasi dan Kepercayaan">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:2rem;">
-            <h2 style="font-size:1.125rem;font-weight:700;color:var(--color-text-primary);">Dipercaya & Diakui</h2>
+        <div class="text-center mb-6">
+            <h2 class="text-sm font-bold text-slate-600 uppercase tracking-widest">Dipercaya &amp; Diakui Institusi Resmi</h2>
         </div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;align-items:center;">
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 items-center">
             @php
             $accreditations = [
                 ['label'=>'KARS','sub'=>'Terakreditasi Paripurna','icon'=>'shield-check','color'=>'#16a34a'],
@@ -562,13 +597,13 @@
             ];
             @endphp
             @foreach ($accreditations as $acc)
-            <div style="display:flex;align-items:center;gap:.75rem;background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:.875rem 1.25rem;box-shadow:var(--shadow-sm);">
-                <div style="width:36px;height:36px;border-radius:8px;background:{{ $acc['color'] }}15;display:flex;align-items:center;justify-content:center;">
-                    <i data-lucide="{{ $acc['icon'] }}" style="width:18px;height:18px;color:{{ $acc['color'] }};" aria-hidden="true"></i>
+            <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-3 px-4 shadow-sm">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background-color: {{ $acc['color'] }}15">
+                    <i data-lucide="{{ $acc['icon'] }}" class="w-4 h-4" style="color: {{ $acc['color'] }}" aria-hidden="true"></i>
                 </div>
                 <div>
-                    <div style="font-size:.875rem;font-weight:800;color:var(--color-text-primary);">{{ $acc['label'] }}</div>
-                    <div style="font-size:.6875rem;color:var(--color-text-muted);">{{ $acc['sub'] }}</div>
+                    <div class="text-xs font-black text-slate-900">{{ $acc['label'] }}</div>
+                    <div class="text-[11px] text-slate-500 font-medium">{{ $acc['sub'] }}</div>
                 </div>
             </div>
             @endforeach
@@ -577,86 +612,86 @@
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 14: FAQ
+     SECTION 14: FAQ ACCORDION
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section class="section" aria-label="Pertanyaan Umum" style="background:var(--color-surface);">
+<section class="section bg-white" aria-label="Pertanyaan Umum">
     <div class="container-xl">
-        <div style="text-align:center;margin-bottom:2.5rem;">
+        <div class="text-center mb-10">
             <span class="section-label primary">FAQ</span>
             <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
-            <p class="section-subtitle" style="margin:0 auto;">Temukan jawaban atas pertanyaan umum seputar layanan RSU Rajawali Citra.</p>
+            <p class="section-subtitle mx-auto">Temukan jawaban atas pertanyaan umum seputar layanan RSU Rajawali Citra.</p>
         </div>
 
-        <div style="max-width:760px;margin:0 auto;" role="list">
+        <div class="max-w-3xl mx-auto space-y-3" role="list">
             @foreach ($faqs as $i => $faq)
-            <div role="listitem" style="border:1px solid var(--color-border);border-radius:var(--radius-md);margin-bottom:.75rem;overflow:hidden;background:#fff;">
+            <div role="listitem" class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
                 <button
                     id="faq-btn-{{ $i }}"
                     onclick="toggleFaq({{ $i }})"
                     aria-expanded="false"
                     aria-controls="faq-panel-{{ $i }}"
-                    style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.25rem;background:none;border:none;cursor:pointer;text-align:left;gap:1rem;">
-                    <span style="font-size:.9375rem;font-weight:600;color:var(--color-text-primary);">{{ $faq['q'] }}</span>
-                    <svg id="faq-icon-{{ $i }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px;color:var(--color-text-muted);flex-shrink:0;transition:transform .3s;" aria-hidden="true">
+                    class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-none border-none cursor-pointer gap-4 transition hover:bg-slate-50">
+                    <span class="text-sm font-bold text-slate-900 leading-snug">{{ $faq['q'] }}</span>
+                    <svg id="faq-icon-{{ $i }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
                     </svg>
                 </button>
-                <div id="faq-panel-{{ $i }}" role="region" aria-labelledby="faq-btn-{{ $i }}" style="display:none;padding:0 1.25rem 1.125rem;font-size:.875rem;color:var(--color-text-secondary);line-height:1.7;">
+                <div id="faq-panel-{{ $i }}" role="region" aria-labelledby="faq-btn-{{ $i }}" class="hidden px-4 sm:px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
                     {{ $faq['a'] }}
                 </div>
             </div>
             @endforeach
         </div>
 
-        <div style="text-align:center;margin-top:2rem;">
-            <a href="{{ route('faq') }}" class="btn btn-outline">Lihat Semua FAQ</a>
+        <div class="text-center mt-8">
+            <a href="{{ route('faq') }}" class="btn btn-outline">Lihat Semua FAQ &rarr;</a>
         </div>
     </div>
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════════════════
-     SECTION 15: CTA APPOINTMENT
+     SECTION 15: CTA APPOINTMENT BANNER
 ═══════════════════════════════════════════════════════════════════════════ --}}
-<section style="background:linear-gradient(135deg,var(--color-primary) 0%,#1e4d8c 60%,var(--color-accent) 100%);padding:5rem 0;position:relative;overflow:hidden;" aria-label="Hubungi Kami">
-    <div aria-hidden="true" style="position:absolute;top:-20%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,.03);border-radius:50%;pointer-events:none;"></div>
-    <div aria-hidden="true" style="position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:rgba(255,255,255,.03);border-radius:50%;pointer-events:none;"></div>
+<section class="bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 py-16 lg:py-20 text-white relative overflow-hidden" aria-label="Hubungi Kami">
+    <div aria-hidden="true" class="absolute -top-20 -right-20 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+    <div aria-hidden="true" class="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
 
-    <div class="container-xl" style="position:relative;z-index:1;text-align:center;">
-        <h2 style="font-size:clamp(1.75rem,4vw,2.75rem);font-weight:900;color:#fff;margin-bottom:1rem;line-height:1.2;">Butuh Bantuan Medis?<br>Kami Siap Melayani Anda</h2>
-        <p style="font-size:1.0625rem;color:rgba(255,255,255,.8);max-width:540px;margin:0 auto 2.5rem;line-height:1.7;">Jangan tunda kesehatan Anda. Hubungi kami sekarang atau buat janji temu dengan dokter spesialis pilihan Anda.</p>
+    <div class="container-xl relative z-10 text-center">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
+            Butuh Bantuan Medis?<br>Kami Siap Melayani Anda
+        </h2>
+        <p class="text-sm sm:text-base text-white/80 max-w-xl mx-auto mb-8 leading-relaxed">
+            Jangan tunda kesehatan Anda. Hubungi kami sekarang atau buat janji temu dengan dokter spesialis pilihan Anda secara online.
+        </p>
 
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-bottom:2.5rem;">
-            <a href="{{ route('contact') }}#appointment" class="btn btn-lg" style="background:#fff;color:var(--color-primary);box-shadow:0 8px 30px rgba(0,0,0,.2);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-                Buat Janji Temu
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10">
+            <a href="{{ route('contact') }}#appointment" class="btn btn-lg w-full sm:w-auto bg-white text-blue-900 hover:bg-slate-100 font-extrabold shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                <span>Buat Janji Temu</span>
             </a>
-            <a href="{{ route('doctors') }}" class="btn btn-outline-white btn-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                Cari Dokter Spesialis
+            <a href="{{ route('doctors') }}" class="btn btn-outline-white btn-lg w-full sm:w-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Cari Dokter</span>
             </a>
-            <a href="tel:+62274123456" class="btn btn-lg" style="background:#dc2626;color:#fff;border-color:#dc2626;box-shadow:0 8px 30px rgba(220,38,38,.4);">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                IGD 24 Jam
+            <a href="tel:+62274123456" class="btn btn-lg w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white border-red-600 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                <span>IGD 24 Jam</span>
             </a>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;">
-            @php
-            $contacts = [
-                ['label'=>'Telepon','value'=>'+62 274-123-456','icon'=>'phone'],
-                ['label'=>'WhatsApp','value'=>'0821-3431-3535','icon'=>'message-circle'],
-                ['label'=>'Email','value'=>'info@rsurajawalicitra.co.id','icon'=>'mail'],
-            ];
-            @endphp
-            @foreach ($contacts as $c)
-            <div style="display:flex;align-items:center;gap:.625rem;color:rgba(255,255,255,.85);">
-                <i data-lucide="{{ $c['icon'] }}" style="width:18px;height:18px;" aria-hidden="true"></i>
-                <div>
-                    <div style="font-size:.6875rem;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.05em;">{{ $c['label'] }}</div>
-                    <div style="font-size:.875rem;font-weight:600;">{{ $c['value'] }}</div>
-                </div>
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-white/80">
+            <div class="flex items-center gap-2">
+                <i data-lucide="phone" class="w-4 h-4" aria-hidden="true"></i>
+                <span class="font-semibold">+62 274-123-456</span>
             </div>
-            @endforeach
+            <div class="flex items-center gap-2">
+                <i data-lucide="message-square" class="w-4 h-4" aria-hidden="true"></i>
+                <span class="font-semibold">0821-3431-3535</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i data-lucide="mail" class="w-4 h-4" aria-hidden="true"></i>
+                <span class="font-semibold">info@rsurajawalicitra.co.id</span>
+            </div>
         </div>
     </div>
 </section>
@@ -669,17 +704,19 @@ function toggleFaq(index) {
     const panel = document.getElementById('faq-panel-' + index);
     const icon  = document.getElementById('faq-icon-' + index);
     const btn   = document.getElementById('faq-btn-' + index);
-    const isOpen = panel.style.display === 'block';
+    if (!panel) return;
 
-    // Close all
-    document.querySelectorAll('[id^="faq-panel-"]').forEach(function(p) { p.style.display = 'none'; });
+    const isOpen = !panel.classList.contains('hidden');
+
+    // Close all FAQs
+    document.querySelectorAll('[id^="faq-panel-"]').forEach(function(p) { p.classList.add('hidden'); });
     document.querySelectorAll('[id^="faq-icon-"]').forEach(function(i) { i.style.transform = ''; });
     document.querySelectorAll('[id^="faq-btn-"]').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
 
     if (!isOpen) {
-        panel.style.display = 'block';
-        icon.style.transform = 'rotate(180deg)';
-        btn.setAttribute('aria-expanded', 'true');
+        panel.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+        if (btn) btn.setAttribute('aria-expanded', 'true');
     }
 }
 </script>

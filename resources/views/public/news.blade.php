@@ -5,7 +5,7 @@
 
 <section class="page-hero">
     <div class="container-xl">
-        <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:1.5rem;">
+        <nav class="breadcrumb mb-4" aria-label="Breadcrumb">
             <a href="{{ route('home') }}">Beranda</a>
             <span class="breadcrumb-sep" aria-hidden="true">›</span>
             <a href="{{ route('information') }}">Informasi</a>
@@ -13,28 +13,36 @@
             <span aria-current="page">Berita</span>
         </nav>
         <span class="section-label">Berita Terbaru</span>
-        <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--color-text-primary);margin-top:.75rem;margin-bottom:1rem;">Berita & Pengumuman</h1>
-        <p style="font-size:1.0625rem;color:var(--color-text-secondary);max-width:600px;line-height:1.75;">Informasi terkini seputar RSU Rajawali Citra, program layanan, dan kegiatan rumah sakit.</p>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-2 mb-4 leading-tight">
+            Berita &amp; Pengumuman RS
+        </h1>
+        <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+            Informasi terkini seputar RSU Rajawali Citra, program layanan, dan kegiatan rumah sakit.
+        </p>
     </div>
 </section>
 
-<section class="section" style="background:var(--color-surface);">
+<section class="section bg-white">
     <div class="container-xl">
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @php $colorMap = ['blue'=>'#2563eb','green'=>'#16a34a','orange'=>'#d97706']; @endphp
             @foreach ($news as $item)
             @php $clr = $colorMap[$item['color']] ?? '#2563eb'; @endphp
-            <article class="card">
-                <div style="padding:1.125rem 1.5rem;border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;">
+            <article class="card flex flex-col h-full">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
                     <span class="badge badge-{{ $item['color'] }}">{{ $item['category'] }}</span>
-                    <time style="font-size:.75rem;color:var(--color-text-muted);" datetime="{{ $item['date'] }}">{{ $item['date'] }}</time>
+                    <time class="text-xs text-slate-400" datetime="{{ $item['date'] }}">{{ $item['date'] }}</time>
                 </div>
-                <div style="padding:1.5rem;flex:1;">
-                    <h2 style="font-size:1rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.75rem;line-height:1.4;">
-                        <a href="{{ route('news.detail', $item['slug']) }}" style="text-decoration:none;color:inherit;">{{ $item['title'] }}</a>
+                <div class="p-5 flex flex-col flex-1">
+                    <h2 class="text-base font-bold text-slate-900 mb-2 leading-snug">
+                        <a href="{{ route('news.detail', $item['slug']) }}" class="hover:text-blue-900 transition no-underline">
+                            {{ $item['title'] }}
+                        </a>
                     </h2>
-                    <p style="font-size:.875rem;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.25rem;">{{ $item['excerpt'] }}</p>
-                    <a href="{{ route('news.detail', $item['slug']) }}" style="font-size:.8125rem;font-weight:700;color:{{ $clr }};text-decoration:none;">Baca Selengkapnya →</a>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 flex-1">{{ $item['excerpt'] }}</p>
+                    <a href="{{ route('news.detail', $item['slug']) }}" class="text-xs font-bold no-underline mt-auto" style="color: {{ $clr }}">
+                        Baca Selengkapnya &rarr;
+                    </a>
                 </div>
             </article>
             @endforeach
