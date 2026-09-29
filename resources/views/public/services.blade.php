@@ -7,8 +7,8 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "MedicalOrganization",
+  "@@context": "https://schema.org",
+  "@@type": "MedicalOrganization",
   "name": "RSU Rajawali Citra",
   "medicalSpecialty": [
     "Emergency","Cardiology","Pediatrics","Obstetrics","Surgery","InternalMedicine","Radiology","Laboratory"

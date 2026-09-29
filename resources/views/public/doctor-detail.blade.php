@@ -7,12 +7,12 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Physician",
+  "@@context": "https://schema.org",
+  "@@type": "Physician",
   "name": "{{ $doctor['name'] }}",
   "medicalSpecialty": "{{ $doctor['specialization'] }}",
   "worksFor": {
-    "@type": "Hospital",
+    "@@type": "Hospital",
     "name": "RSU Rajawali Citra",
     "url": "{{ route('home') }}"
   },

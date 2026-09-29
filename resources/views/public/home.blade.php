@@ -7,14 +7,14 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Hospital",
+  "@@context": "https://schema.org",
+  "@@type": "Hospital",
   "name": "RSU Rajawali Citra",
   "url": "{{ url('/') }}",
   "telephone": "+62274123456",
   "email": "info@rsurajawalicitra.co.id",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "streetAddress": "Jl. Pleret No. KM 2.5, Banjardadap, Potorono, Banguntapan",
     "addressLocality": "Bantul",
     "addressRegion": "DI Yogyakarta",

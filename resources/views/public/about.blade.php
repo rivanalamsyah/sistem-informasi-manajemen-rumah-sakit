@@ -7,16 +7,16 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
+  "@@context": "https://schema.org",
+  "@@type": "AboutPage",
   "name": "Tentang RSU Rajawali Citra",
   "description": "Profil, sejarah, visi, misi, dan akreditasi RSU Rajawali Citra",
   "url": "{{ route('about') }}",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      {"@type":"ListItem","position":1,"name":"Beranda","item":"{{ route('home') }}"},
-      {"@type":"ListItem","position":2,"name":"Tentang Kami","item":"{{ route('about') }}"}
+      {"@@type":"ListItem","position":1,"name":"Beranda","item":"{{ route('home') }}"},
+      {"@@type":"ListItem","position":2,"name":"Tentang Kami","item":"{{ route('about') }}"}
     ]
   }
 }

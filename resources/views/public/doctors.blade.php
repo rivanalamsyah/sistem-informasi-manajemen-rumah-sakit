@@ -7,16 +7,16 @@
 @push('head')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
+  "@@context": "https://schema.org",
+  "@@type": "ItemList",
   "name": "Dokter Spesialis RSU Rajawali Citra",
   "itemListElement": [
     @foreach ($doctors as $i => $doctor)
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": {{ $i + 1 }},
       "item": {
-        "@type": "Physician",
+        "@@type": "Physician",
         "name": "{{ $doctor['name'] }}",
         "medicalSpecialty": "{{ $doctor['specialization'] }}",
         "url": "{{ route('doctors.detail', $doctor['slug']) }}"
